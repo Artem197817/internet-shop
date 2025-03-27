@@ -1,0 +1,75 @@
+@use "variables" as vars;
+
+html, body{
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat,sans-serif;
+  font-weight: 400;
+}
+.container{
+  max-width: vars.$container-width;
+  margin: 0 auto;
+}
+.input{
+  font-family: Montserrat,sans-serif;
+  font-weight: 400;
+  border-radius: 3px;
+  padding: 17px 20px;
+  border: 2px solid #2A592E;
+  font-size: 14px;
+  color: vars.$gray-text-color;
+  box-sizing: border-box;
+
+  &::placeholder{
+    color: #A8ABA7;
+  }
+}
+.button {
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #456F49;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+
+  &:disabled{
+    background: #616161;
+    cursor: not-allowed;
+  }
+}
+.mat-menu-item{
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  a{
+    text-decoration: none;
+    cursor: pointer;
+    color: vars.$gray-text-color;
+  }
+}
+a.button{
+  text-decoration: none;
+  display: inline-block;
+
+}
+.small-input{
+  border: 1px solid #6CAC72;
+  border-radius: 5px;
+  text-align: center;
+  padding: 2px;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: vars.$green-text-color;
+  width: 40px;
+  height: 28px;
+
+
+}

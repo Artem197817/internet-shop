@@ -1,0 +1,9 @@
+@use "variables" as *;
+
+@mixin head-Lora-32{
+  font-family: 'Lora', serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  color: $green-text-color;
+}

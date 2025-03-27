@@ -1,0 +1,21 @@
+import {Component, Input} from '@angular/core';
+import {CategoryType} from '../../types/category.types';
+
+@Component({
+  selector: 'app-footer',
+  standalone: false,
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.scss'
+})
+export class FooterComponent {
+  protected footerTopMenuList = [
+    {title: 'Главная', link: 'main'},
+    {title: 'Каталог', link: 'catalog'},
+    {title: 'Доставка и оплата', link: 'delivery'},
+    {title: 'Новости', link: 'news'},
+    {title: 'Отзывы', link: 'reviews'},
+  ]
+  @Input() categories: CategoryType[]=[];
+
+ protected email:string='homedecor@gmail.com'
+}

@@ -1,0 +1,109 @@
+@use "../../../assets/styles/_variables" as vars;
+
+footer.footer{
+  padding-bottom: 50px;
+  padding-top: 39px;
+  background: #648F64;
+    .container{
+      display: flex;
+
+      .logo{
+        padding-right: 63px;
+      }
+      .footer-block{
+        padding-top: 11px;
+
+        .footer-head{
+          font-family: Montserrat,sans-serif;
+          font-weight: 500;
+          font-size: 16px;
+          color: vars.$gray-text-color;
+          margin-bottom: 25px;
+          text-transform: uppercase;
+        }
+        .footer-items{
+          ul{
+            list-style: none;
+            padding: 0;
+
+            li{
+              margin-bottom: 15px;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+                a{
+                  font-size: 16px;
+                  color: vars.$gray-text-color;
+                  text-decoration: none;
+                  cursor: pointer;
+            }
+            }
+          }
+        }
+        &.footer-menu{
+          margin-right: 57px;
+        }
+        &.footer-category{
+          margin-right: 34px;
+          ul{
+            list-style: none;
+            padding: 0;
+             li{
+               font-size: 16px;
+               color: vars.$gray-text-color;
+               margin-bottom: 11px;
+             }
+          }
+        }
+        &.footer-info{
+          margin-right: 63px;
+          .footer-head{
+            margin-bottom: 15px;
+          }
+
+          .footer-social{
+            display: flex;
+            align-items: center;
+            margin-bottom: 55px;
+
+            a{
+              margin-right: 15px;
+            }
+          }
+          .footer-payment{
+            display: grid;
+            grid-template-columns: repeat(3,70px);
+            gap: 10px;
+            max-width: 230px;
+
+            img{
+              height: 35px;
+            }
+          }
+        }
+        &.footer-contacts{
+          max-width: 250px;
+
+          .footer-contact {
+            margin-bottom: 15px;
+            &:last-child{
+              margin-bottom: 0;
+            }
+            .footer-contact-head {
+              font-family: Montserrat, sans-serif;
+              font-weight: 500;
+              font-size: 16px;
+              color: vars.$gray-text-color;
+              margin-bottom: 6px;
+            }
+
+            .footer-contact-info {
+              font-size: 16px;
+              color: vars.$gray-text-color;
+            }
+          }
+        }
+      }
+    }
+}

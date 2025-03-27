@@ -1,0 +1,155 @@
+@use "../../../assets/styles/_variables" as vars;
+@use "../../../assets/styles/_fonts";
+
+header.header {
+  padding: 30px 0 49px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+
+    }
+
+    .header-top {
+      padding-top: 32px;
+      padding-bottom: 25px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #B6D5B9;
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+
+      .header-top-menu {
+        margin-left: 26px;
+        margin-right: 191px;
+
+        ul {
+          display: flex;
+          margin: 0;
+          padding: 0;
+
+          li {
+            margin-right: 40px;
+            list-style: none;
+            border-bottom: 1px solid transparent;
+            &:active{
+              border-color: vars.$base-text-color;
+            }
+            a {
+              text-decoration: none;
+              font-size: 16px;
+              color: vars.$base-text-color;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .header-top-phone {
+        font-size: 16px;
+        text-decoration: none;
+        color: vars.$base-text-color;
+        margin-right: 59px;
+        cursor: pointer;
+      }
+
+      .header-top-action {
+        display: flex;
+        align-items: center;
+
+        a {
+          text-decoration: none;
+          margin-right: 8px;
+          cursor: pointer;
+          position: relative;
+
+          &:last-child {
+            margin-right: 18px;
+
+            span {
+              position: absolute;
+              height: 18px;
+              width: 18px;
+              border-radius: 50%;
+              font-family: Montserrat, sans-serif;
+              font-weight: 400;
+              font-size: 9px;
+              color: vars.$base-text-color;
+              background: #B6D5B9;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              top: 10px;
+              right: -18px;
+            }
+          }
+        }
+      }
+    }
+
+    .header-bottom {
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+
+
+      .header-bottom-menu {
+        margin-left: 26px;
+        margin-right: 97px;
+
+        ul {
+          display: flex;
+          margin: 0;
+          padding: 0;
+
+          li {
+            margin-right: 50px;
+            list-style: none;
+            border-bottom: 1px solid transparent;
+            &:active{
+              border-bottom-color: vars.$base-text-color;
+            }
+
+            a {
+              text-decoration: none;
+              cursor: pointer;
+              font-size: 16px;
+              color: vars.$base-text-color;
+
+            }
+          }
+        }
+      }
+
+      .header-bottom-search {
+        position: relative;
+
+        input {
+          width: 215px;
+          height: 41px;
+          left: 0.5px;
+          gap: 12px;
+          border-radius: 30px;
+          padding: 10px 10px 10px 43px;
+          border: 1px solid vars.$base-text-color;
+          font-size: 16px;
+          color: vars.$base-text-color;
+          box-sizing: border-box;
+          outline: none;
+          }
+        &:after{
+          content: "";
+          background-image: url("../../../assets/images/icons/search.png");
+          position: absolute;
+          background-size: cover;
+          width: 16px;
+          height: 16px;
+          left: 15px;
+          top: 11px;
+        }
+      }
+    }
+  }
+}
