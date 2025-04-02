@@ -15,7 +15,33 @@ import {OwlOptions} from 'ngx-owl-carousel-o';
 export class MainComponent implements OnInit{
 
   protected bestProducts: Product[] = [];
-  customOptions: OwlOptions = {
+  protected customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    margin: 26,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+
+      940: {
+        items: 4
+      }
+    },
+    nav: false
+  }
+ protected customOptionsReviews: OwlOptions = {
     loop: true,
     mouseDrag: false,
     touchDrag: false,
@@ -34,9 +60,6 @@ export class MainComponent implements OnInit{
       740: {
         items: 3
       },
-      940: {
-        items: 4
-      }
     },
     nav: false
   }
@@ -59,22 +82,22 @@ export class MainComponent implements OnInit{
    },
    {
      name: 'Аделина',
-     image: 'rev-4.png',
+     image: 'rev-4.jpg',
      text: 'Хочу поблагодарить всю команду за помощь в подборе подарка для моей мамы! Все просто в восторге от мини-сада! А самое главное, что за ним удобно ухаживать, ведь в комплекте мне дали целую инструкцию.'
    },
    {
      name: 'Яника',
-     image: 'rev-5.png',
+     image: 'rev-5.jpg',
      text: 'Спасибо большое за мою обновлённую коллекцию суккулентов! Сервис просто на 5+: быстро, удобно, недорого. Что ещё нужно клиенту для счастья?'
    },
    {
      name: 'Марина',
-     image: 'rev-6.png',
+     image: 'rev-6.jpg',
      text: 'Для меня всегда важным аспектом было наличие не только физического магазина, но и онлайн-маркета, ведь не всегда есть возможность прийти на место. Ещё нигде не встречала такого огромного ассортимента!'
    },
    {
      name: 'Станислав',
-     image: 'rev-7.png',
+     image: 'rev-7.jpg',
      text: 'Хочу поблагодарить консультанта Ирину за помощь в выборе цветка для моей жены. Я ещё никогда не видел такого трепетного отношения к весьма непростому клиенту, которому сложно угодить! Сервис – огонь!'
    },
  ]
@@ -88,5 +111,9 @@ export class MainComponent implements OnInit{
       .subscribe((bestProducts: Product[]) => {
         this.bestProducts = bestProducts;
       })
+  }
+
+  trackProductById(index: number, product: Product): string {
+    return product.id;
   }
 }

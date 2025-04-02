@@ -9,11 +9,11 @@ import {CategoryType} from '../../types/category.types';
 })
 export class FooterComponent {
   protected footerTopMenuList = [
-    {title: 'Главная', link: 'main'},
-    {title: 'Каталог', link: 'catalog'},
-    {title: 'Доставка и оплата', link: 'delivery'},
-    {title: 'Новости', link: 'news'},
-    {title: 'Отзывы', link: 'reviews'},
+    {title: 'Главная', link: '/'},
+    {title: 'Каталог', link: '/catalog'},
+    {title: 'Доставка и оплата', link: '/delivery'},
+    {title: 'Новости', link: '/news'},
+    {title: 'Отзывы', link: '/reviews'},
   ]
   @Input() categories: CategoryType[]=[];
 

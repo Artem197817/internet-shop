@@ -16,3 +16,9 @@ export interface Product {
   url: string;
   type: ProductType;
 }
+
+export interface Products {
+  totalCount: number;
+  pages: number;
+  items: Product[];
+}

@@ -184,3 +184,79 @@
     }
   }
 }
+
+.reviews {
+  margin-top: 130px;
+  margin-bottom: 130px;
+
+  .container {
+    .reviews-title {
+      @include head-Lora-32;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .reviews-carousel {
+      position: relative;
+
+      .review-item {
+        width: 396px;
+        height: 267px;
+        padding: 30px;
+        border-radius: 10px;
+        border: 2px solid #2A592E;
+        box-sizing: border-box;
+
+        .review-item-head {
+          display: flex;
+          align-items: center;
+
+          .review-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+            margin-right: 26px;
+          }
+
+          .review-item-name {
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: $green-text-color;
+          }
+        }
+        .review-item-text{
+          font-size: 16px;
+          line-height: 140%;
+          color: $gray-text-color;
+          margin-top: 15px;
+
+        }
+      }
+      .reviews-arrows{
+        display: flex;
+        z-index: 10;
+        .move{
+          top: calc(50% - 5px);
+          display: flex;
+          position: absolute;
+          cursor: pointer;
+
+          &.move-backward{
+            left: -41px;
+          }
+          &.move-forward{
+            right: -41px;
+          }
+        }
+      }
+
+    }
+
+  }
+}
+.map iframe{
+  vertical-align: bottom;
+}

@@ -12,30 +12,35 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
 import {MatMenuModule} from '@angular/material/menu';
 import {ProductCardComponent} from './shared/components/product-card/product-card.component';
 import {CarouselModule} from 'ngx-owl-carousel-o';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LayoutComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainComponent,
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    MatSnackBarModule,
-    MatMenuModule,
-    HttpClientModule,
-    CarouselModule,
-    AppRoutingModule,
-    ProductCardComponent,
-  ],
-  providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LayoutComponent,
+        HeaderComponent,
+        FooterComponent,
+        MainComponent,
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatSnackBarModule,
+        MatMenuModule,
+        HttpClientModule,
+        CarouselModule,
+        AppRoutingModule,
+        ProductCardComponent,
+    ],
+    providers: [
+        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+    ],
+    exports: [
+
+    ],
+    bootstrap: [AppComponent]
 
 })
 export class AppModule { }

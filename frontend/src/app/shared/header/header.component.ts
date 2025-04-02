@@ -15,10 +15,10 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   protected headerTopMenuList = [
-    {title: 'Главная', link: 'main'},
-    {title: 'Каталог', link: 'catalog'},
-    {title: 'Отзывы', link: 'reviews'},
-    {title: 'Доставка и оплата', link: 'delivery'},
+    {title: 'Главная', link: '/'},
+    {title: 'Каталог', link: '/catalog'},
+    {title: 'Отзывы', link: '/reviews'},
+    {title: 'Доставка и оплата', link: '/delivery'},
   ]
   isLoggedIn: boolean = false;
 
