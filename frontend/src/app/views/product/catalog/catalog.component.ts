@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ProductService} from '../../../shared/services/product.service';
 import {Product} from '../../../types/product.types';
 import {CategoryService} from '../../../shared/services/category.service';
@@ -19,9 +19,15 @@ export class CatalogComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private router: Router,
-              private categoryService: CategoryService,) {}
+              private categoryService: CategoryService,
+              private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
+
+    this.activatedRoute.queryParams.subscribe(params =>{
+      
+    })
+
     this.productService.getProducts()
       .subscribe(products => {
         this.products = products.items;
