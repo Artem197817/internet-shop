@@ -1,8 +1,8 @@
 import { Params } from "@angular/router";
 import { ActiveParam } from "../../types/activeParam.types";
 
-export class activeParamsUtils{
-    static processParams(params: Params){
+export class ActiveParamsUtils{
+    static processParams(params: Params): ActiveParam{
         const activeParams: ActiveParam = {types: []};
         if(params.hasOwnProperty('types')){
           activeParams.types = Array.isArray(params['types'])? params['types']:[params['types']]

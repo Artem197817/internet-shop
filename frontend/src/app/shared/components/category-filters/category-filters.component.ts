@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActiveParam} from '../../../types/activeParam.types';
 import {FormsModule} from '@angular/forms';
+import { ActiveParamsUtils } from '../../utils/active-params.util';
 
 @Component({
   selector: 'category-filters',
@@ -46,7 +47,7 @@ ngOnInit(): void {
   this.activatedRoute.queryParams.subscribe(params => {
 
 
-    this.activeParams = activeParams;
+    this.activeParams = ActiveParamsUtils.processParams(params);
     if(this.type){
   
       if(this.type === 'height'){
@@ -59,8 +60,10 @@ ngOnInit(): void {
         this.open = !!(this.activeParams.diameterFrom || this.activeParams.diameterTo)
     }
   } else {
-    this.activeParams.types = params['types'];
-
+    if(params['types']){
+      this.activeParams.types = Array.isArray(params['types'])? params['types']:[params['types']];
+    }
+  
     if(this.cwt && this.cwt.types && this.cwt.types.length > 0
       && this.cwt.types.some(type => this.activeParams.types.find(item => type.url === item))){
      
@@ -86,7 +89,6 @@ updateFilterParam(url: string, checked: boolean){
       this.activeParams.types = [url];
 
   }
-  console.log(this.activeParams);
   this.router.navigate(['/catalog'], {
     queryParams: this.activeParams
   });
