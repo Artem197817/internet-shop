@@ -7,6 +7,7 @@ import {CategoryWithTypes} from '../../../types/category.types';
 import { ActiveParam } from '../../../types/activeParam.types';
 import { ActiveParamsUtils } from '../../../shared/utils/active-params.util';
 import { AppliedFilterType } from '../../../types/applied-filter.type';
+import {debounceTime} from 'rxjs';
 
 @Component({
   selector: 'app-catalog',
@@ -41,7 +42,12 @@ export class CatalogComponent implements OnInit {
     this.categoryService.getCategoriesWithTypes()
     .subscribe(categories => {
         this.categoriesWithTypes = categories;
-        this.activatedRoute.queryParams.subscribe(params =>{
+        this.activatedRoute.queryParams
+          .pipe(
+            debounceTime(800)
+          )
+
+          .subscribe(params =>{
           this.activeParams = ActiveParamsUtils.processParams(params);
 
           this.appliedFilters = [];

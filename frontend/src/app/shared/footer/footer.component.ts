@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CategoryType} from '../../types/category.types';
+import {CategoryType, CategoryWithTypes} from '../../types/category.types';
 
 @Component({
   selector: 'app-footer',
@@ -15,7 +15,7 @@ export class FooterComponent {
     {title: 'Новости', link: '/news'},
     {title: 'Отзывы', link: '/reviews'},
   ]
-  @Input() categories: CategoryType[]=[];
+  @Input() categories: CategoryWithTypes[]=[];
 
  protected email:string='homedecor@gmail.com'
 }

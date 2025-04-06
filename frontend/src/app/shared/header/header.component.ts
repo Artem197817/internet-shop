@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryType} from '../../types/category.types';
+import {CategoryType, CategoryWithTypes} from '../../types/category.types';
 import {AuthService} from '../../core/auth/auth.service';
 import {DefaultErrorResponse} from '../../types/default-error.type';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   ]
   isLoggedIn: boolean = false;
 
-  @Input() categories: CategoryType[] = [];
+  @Input() categories: CategoryWithTypes[] = [];
 
   constructor(private authService: AuthService,
               private snackBar: MatSnackBar,

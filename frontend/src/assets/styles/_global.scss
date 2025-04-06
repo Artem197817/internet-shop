@@ -1,4 +1,5 @@
 @use "variables" as vars;
+@use "mixins" as *;
 
 html, body{
   margin: 0;
@@ -43,6 +44,19 @@ html, body{
     background: #616161;
     cursor: not-allowed;
   }
+  &.button-transparent{
+    border: 1px solid #6CAC72;
+    background: transparent;
+    color: vars.$green-text-color;
+  }
+  &.button-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span{
+      margin-left: 16px;
+    }
+  }
 }
 .mat-menu-item{
   font-family: Montserrat, sans-serif;
@@ -70,6 +84,28 @@ a.button{
   color: vars.$green-text-color;
   width: 40px;
   height: 28px;
+}
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
 
+  .carousel-title {
+    @include head-Lora-32;
+  }
 
+  .carousel-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      cursor: pointer;
+
+      &:first-child {
+        margin-right: 30px;
+      }
+    }
+  }
 }

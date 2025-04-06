@@ -7,3 +7,10 @@
   font-weight: 400;
   color: $green-text-color;
 }
+@mixin head-Lora-36{
+  font-family: 'Lora', serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  color: black;
+}

@@ -53,6 +53,12 @@ footer.footer{
                font-size: 16px;
                color: vars.$gray-text-color;
                margin-bottom: 11px;
+               a{
+                 font-size: 16px;
+                 color: vars.$gray-text-color;
+                 text-decoration: none;
+                 cursor: pointer;
+               }
              }
           }
         }

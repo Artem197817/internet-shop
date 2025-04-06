@@ -6,6 +6,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { DetailComponent } from './detail/detail.component';
 import {ProductCardComponent} from "../../shared/components/product-card/product-card.component";
 import {CategoryFiltersComponent} from '../../shared/components/category-filters/category-filters.component';
+import {CarouselModule} from "ngx-owl-carousel-o";
 
 
 @NgModule({
@@ -13,11 +14,12 @@ import {CategoryFiltersComponent} from '../../shared/components/category-filters
     CatalogComponent,
     DetailComponent
   ],
-  imports: [
-    CommonModule,
-    ProductRoutingModule,
-    ProductCardComponent,
-    CategoryFiltersComponent
-  ]
+    imports: [
+        CommonModule,
+        ProductRoutingModule,
+        ProductCardComponent,
+        CategoryFiltersComponent,
+        CarouselModule
+    ]
 })
 export class ProductModule { }

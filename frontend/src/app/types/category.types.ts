@@ -21,4 +21,5 @@ export interface CategoryWithTypes {
   name:string;
   url:string;
   types: Type [];
+  typesUrl?: string[];
 }
