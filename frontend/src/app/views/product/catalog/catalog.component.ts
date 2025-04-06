@@ -20,6 +20,15 @@ export class CatalogComponent implements OnInit {
   protected categoriesWithTypes: CategoryWithTypes[] = [];
   activeParams:ActiveParam = {types: []}
   appliedFilters: AppliedFilterType [] = [];
+  sortingOpen = false;
+  sortingOptions:{name: string, value: string}[] =[
+    {name: 'От А до Я', value: 'az-asc'},
+    {name: 'От Я до А', value: 'az-desc'},
+    {name: 'По возрастанию цены', value: 'price-asc'},
+    {name: 'По убыванию цены', value: 'price-desc'},
+  ] ;
+
+  pages:number[] =[];
 
   constructor(private productService: ProductService,
               private router: Router,
@@ -28,16 +37,16 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
+
     this.categoryService.getCategoriesWithTypes()
     .subscribe(categories => {
         this.categoriesWithTypes = categories;
         this.activatedRoute.queryParams.subscribe(params =>{
           this.activeParams = ActiveParamsUtils.processParams(params);
-    
+
           this.appliedFilters = [];
           this.activeParams.types.forEach(url =>{
-    
+
             for(let i = 0;i < this.categoriesWithTypes.length; i++){
                 const foundType = this.categoriesWithTypes[i].types.find(type => type.url === url)
                 if(foundType){
@@ -72,28 +81,69 @@ export class CatalogComponent implements OnInit {
                 urlParam: 'diameterTo'
               })
             }
-    
+          this.productService.getProducts(this.activeParams)
+            .subscribe(products => {
+              this.products = products.items;
+              this.pages = [];
+              for (let i = 1; i <= products.pages ; i++) {
+                this.pages.push(i);
+              }
+            })
         })
     })
 
 
 
-    this.productService.getProducts()
-      .subscribe(products => {
-        this.products = products.items;
-      })
+
 
   }
 
   removeAppliedFilter(appliedFilter: AppliedFilterType){
-    if(appliedFilter.urlParam === 'heightFrom' || appliedFilter.urlParam === 'heightTo' 
+    if(appliedFilter.urlParam === 'heightFrom' || appliedFilter.urlParam === 'heightTo'
     || appliedFilter.urlParam === 'diameterFrom' || appliedFilter.urlParam === 'diameterTo'){
       delete this.activeParams[appliedFilter.urlParam];
     }else{
       this.activeParams.types = this.activeParams.types.filter(item => item !== appliedFilter.urlParam)
     }
+    this.activeParams.page = 1;
     this.router.navigate(['/catalog'], {
       queryParams: this.activeParams
     });
+  }
+
+  toggleSorting(){
+    this.sortingOpen = !this.sortingOpen;
+  }
+
+  sort(value: string) {
+    this.activeParams.sort = value;
+    this.router.navigate(['/catalog'], {
+      queryParams: this.activeParams
+    });
+  }
+
+  openPage(page: number) {
+    this.activeParams.page = page;
+    this.router.navigate(['/catalog'], {
+      queryParams: this.activeParams
+    });
+  }
+
+  openNextPage() {
+    if(this.activeParams.page && this.activeParams.page < this.pages.length){
+     this.activeParams.page++;
+      this.router.navigate(['/catalog'], {
+        queryParams: this.activeParams
+      });
+    }
+  }
+
+  openPrevPage() {
+    if(this.activeParams.page && this.activeParams.page > 1){
+      this.activeParams.page--;
+      this.router.navigate(['/catalog'], {
+        queryParams: this.activeParams
+      });
+    }
   }
 }

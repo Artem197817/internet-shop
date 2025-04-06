@@ -24,8 +24,7 @@
       .catalog-applied-filters {
         display: flex;
         flex-wrap: wrap;
-        margin-right: 20px;
-        margin-bottom: 20px;
+
 
         .catalog-applied-filter {
           border: 1px solid #E7F1E8;
@@ -34,6 +33,8 @@
           padding: 8px 14px;
           display: flex;
           align-items: center;
+          margin-right: 10px;
+          margin-bottom: 15px;
 
           a {
             text-decoration: none;
@@ -45,9 +46,11 @@
       }
 
       .catalog-sorting {
-        width: 2557px;
+        width: 190px;
+        min-width: 190px;
         box-sizing: border-box;
         position: relative;
+        cursor: pointer;
 
         .catalog-sorting-head {
           display: flex;
@@ -89,6 +92,8 @@
         }
 
         &.open {
+          width: 257px;
+          min-width: 257px;
           .catalog-sorting-head {
             color: #000000;
             background: #EBEBEB;

@@ -49,7 +49,7 @@ ngOnInit(): void {
 
     this.activeParams = ActiveParamsUtils.processParams(params);
     if(this.type){
-  
+
       if(this.type === 'height'){
         this.open = !!(this.activeParams.heightFrom || this.activeParams.heightTo)
         this.from = this.activeParams.heightFrom? +this.activeParams.heightFrom: null;
@@ -63,10 +63,10 @@ ngOnInit(): void {
     if(params['types']){
       this.activeParams.types = Array.isArray(params['types'])? params['types']:[params['types']];
     }
-  
+
     if(this.cwt && this.cwt.types && this.cwt.types.length > 0
       && this.cwt.types.some(type => this.activeParams.types.find(item => type.url === item))){
-     
+
       this.open = true;
     }
   }
@@ -89,6 +89,7 @@ updateFilterParam(url: string, checked: boolean){
       this.activeParams.types = [url];
 
   }
+  this.activeParams.page = 1;
   this.router.navigate(['/catalog'], {
     queryParams: this.activeParams
   });
@@ -104,6 +105,7 @@ updateFilterParam(url: string, checked: boolean){
     }else{
       this.activeParams[param] = value;
     }
+    this.activeParams.page = 1;
     this.router.navigate(['/catalog'], {
       queryParams: this.activeParams
     });
