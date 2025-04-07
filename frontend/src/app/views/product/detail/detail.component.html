@@ -3,7 +3,7 @@
   <div class="container">
     <div class="detail-title">{{product.name}}</div>
     <div class="detail-product">
-      <div class="detail-image" [style.background-image]="`url(${serverStaticPath}${product.image})`"></div>
+      <div class="detail-image" style="background-image: url({{serverStaticPath + product.image}})"></div>
     <div class="detail-info">
       <div class="detail-info-items">
         <div class="detail-info-item" *ngIf="product.lightning">
@@ -68,7 +68,7 @@
       <div class="detail-info-params">
         <div class="detail-info-count">
           <span>Количество: </span>
-              <count-selector (onCountChange)="updateCount($event)"></count-selector>
+              <count-selector [count]="count" (onCountChange)="updateCount($event)"></count-selector>
         </div>
         <div class="detail-info-price">{{product.price}} BYN</div>
       </div>
@@ -79,7 +79,7 @@
           </svg>
           <span>В избранное</span>
         </div>
-        <div class="button" (click)="addTOCart()">В корзину</div>
+        <div class="button" (click)="addToCart()">В корзину</div>
       </div>
     </div>
     </div>

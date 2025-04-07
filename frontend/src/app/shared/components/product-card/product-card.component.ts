@@ -4,6 +4,7 @@ import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {FormsModule} from '@angular/forms';
+import {CountSelectorComponent} from '../count-selector/count-selector.component';
 
 @Component({
   selector: 'product-card',
@@ -13,6 +14,7 @@ import {FormsModule} from '@angular/forms';
     NgIf,
     RouterLink,
     FormsModule,
+    CountSelectorComponent,
   ],
   styleUrl: './product-card.component.scss'
 })

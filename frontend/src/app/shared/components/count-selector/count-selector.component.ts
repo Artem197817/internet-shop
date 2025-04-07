@@ -1,8 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'count-selector',
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   standalone: true,
   templateUrl: './count-selector.component.html',
   styleUrl: './count-selector.component.scss'
@@ -20,7 +23,7 @@ export class CountSelectorComponent {
     }
   }
   increaseCount(){
-    
+
       this.count++;
       this.countChange();
   }
