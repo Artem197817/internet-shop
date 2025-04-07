@@ -98,10 +98,6 @@ export class CatalogComponent implements OnInit {
         })
     })
 
-
-
-
-
   }
 
   removeAppliedFilter(appliedFilter: AppliedFilterType){

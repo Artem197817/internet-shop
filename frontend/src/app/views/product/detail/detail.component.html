@@ -1,12 +1,12 @@
 
-<section class="detail">
+<section class="detail" *ngIf="product">
   <div class="container">
-    <div class="detail-title"></div>
+    <div class="detail-title">{{product.name}}</div>
     <div class="detail-product">
-      <div class="detail-image" style="background-image: url()"></div>
+      <div class="detail-image" [style.background-image]="`url(${serverStaticPath}${product.image})`"></div>
     <div class="detail-info">
       <div class="detail-info-items">
-        <div class="detail-info-item">
+        <div class="detail-info-item" *ngIf="product.lightning">
           <div class="detail-info-item-icon">
             <svg width="53" height="55" viewBox="0 0 53 55" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M37.4048 28.1161C37.0958 21.732 32.0783 16.7854 26.0972 16.7854C20.116 16.7854 15.0985 21.732 14.7896 28.1161H13C13.3116 20.8158 19.0562 14.9976 26.0972 14.9976C33.1381 14.9976 38.8828 20.8158 39.1943 28.1161H37.4048Z" fill="#519157"/>
@@ -20,10 +20,10 @@
           </div>
           <div class="detail-info-item-description">
             <div class="detail-info-item-description-title">Освещение</div>
-            <div class="detail-info-item-description-text"></div>
+            <div class="detail-info-item-description-text">{{product.lightning}}</div>
           </div>
         </div>
-        <div class="detail-info-item">
+        <div class="detail-info-item" *ngIf="product.humidity">
           <div class="detail-info-item-icon">
             <svg width="53" height="55" viewBox="0 0 53 55" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="26.2338" cy="27.5" rx="26.2338" ry="27.5" fill="white"/>
@@ -38,10 +38,10 @@
           </div>
           <div class="detail-info-item-description">
             <div class="detail-info-item-description-title">Влажность</div>
-            <div class="detail-info-item-description-text"></div>
+            <div class="detail-info-item-description-text">{{product.humidity}}</div>
           </div>
         </div>
-        <div class="detail-info-item">
+        <div class="detail-info-item" *ngIf="product.temperature">
           <div class="detail-info-item-icon">
             <svg width="53" height="55" viewBox="0 0 53 55" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="26.2338" cy="27.5" rx="26.2338" ry="27.5" fill="white"/>
@@ -53,24 +53,24 @@
           </div>
           <div class="detail-info-item-description">
             <div class="detail-info-item-description-title">Температура</div>
-            <div class="detail-info-item-description-text"></div>
+            <div class="detail-info-item-description-text">{{product.temperature}}</div>
           </div>
         </div>
       </div>
-      <div class="detail-info-param">
-        <div class="detail-info-param-name"></div>
-        <div class="detail-info-param-data"></div>
+      <div class="detail-info-param" *ngIf="product.height">
+        <div class="detail-info-param-name">Высота: </div>
+        <div class="detail-info-param-data">{{product.height}} см</div>
       </div>
-      <div class="detail-info-param">
-        <div class="detail-info-param-name"></div>
-        <div class="detail-info-param-data"></div>
+      <div class="detail-info-param"*ngIf="product.diameter">
+        <div class="detail-info-param-name">Диаметр (горшка): </div>
+        <div class="detail-info-param-data">{{product.diameter}} см</div>
       </div>
       <div class="detail-info-params">
         <div class="detail-info-count">
           <span>Количество: </span>
-
+              <count-selector (onCountChange)="updateCount($event)"></count-selector>
         </div>
-        <div class="detail-info-price"></div>
+        <div class="detail-info-price">{{product.price}} BYN</div>
       </div>
       <div class="detail-info-action">
         <div class="button button-transparent button-icon">
@@ -79,7 +79,7 @@
           </svg>
           <span>В избранное</span>
         </div>
-        <div class="button">В корзину</div>
+        <div class="button" (click)="addTOCart()">В корзину</div>
       </div>
     </div>
     </div>

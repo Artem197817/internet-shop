@@ -17,6 +17,17 @@ export class ProductService {
     return this.http.get<Product[]>(environment.api + 'products/best')
   }
 
+  getProducts(params?: ActiveParam): Observable<Products> {
+    return this.http.get<Products>(this.apiUrl, { params: params });
+  }
+
+  getProduct(url: string): Observable<Product> {
+    return this.http.get<Product>(this.apiUrl + '/' + url);
+  }
+
+}
+
+
 
   // getProducts(params?: ActiveParam): Observable<Products> {
   //   let httpParams = new HttpParams();
@@ -47,9 +58,3 @@ export class ProductService {
   //
   //   return this.http.get<Products>(this.apiUrl, { params: httpParams });
   // }
-
-  getProducts(params?: ActiveParam): Observable<Products> {
-    return this.http.get<Products>(this.apiUrl, { params: params });
-  }
-
-}
