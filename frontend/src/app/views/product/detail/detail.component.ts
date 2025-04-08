@@ -4,7 +4,7 @@ import {Product} from '../../../types/product.types';
 import {ProductService} from '../../../shared/services/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { environment } from '../../../../environments/environment';
-import {count} from 'rxjs';
+
 
 @Component({
   selector: 'app-detail',

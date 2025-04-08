@@ -8,6 +8,8 @@ import { ActiveParam } from '../../../types/activeParam.types';
 import { ActiveParamsUtils } from '../../../shared/utils/active-params.util';
 import { AppliedFilterType } from '../../../types/applied-filter.type';
 import {debounceTime} from 'rxjs';
+import { CartService } from '../../../shared/services/cart.service';
+import { CartType } from '../../../types/cart.types';
 
 @Component({
   selector: 'app-catalog',
@@ -22,6 +24,7 @@ export class CatalogComponent implements OnInit {
   activeParams:ActiveParam = {types: []}
   appliedFilters: AppliedFilterType [] = [];
   sortingOpen = false;
+  cart: CartType | null = null;
   sortingOptions:{name: string, value: string}[] =[
     {name: 'От А до Я', value: 'az-asc'},
     {name: 'От Я до А', value: 'az-desc'},
@@ -34,10 +37,14 @@ export class CatalogComponent implements OnInit {
   constructor(private productService: ProductService,
               private router: Router,
               private categoryService: CategoryService,
-              private activatedRoute: ActivatedRoute) {}
+              private activatedRoute: ActivatedRoute,
+              private cartService: CartService) {}
 
   ngOnInit(): void {
-
+    this.cartService.getCart()
+    .subscribe((data:CartType)=>{
+      this.cart = data;
+    })
 
     this.categoryService.getCategoriesWithTypes()
     .subscribe(categories => {
@@ -89,10 +96,22 @@ export class CatalogComponent implements OnInit {
             }
           this.productService.getProducts(this.activeParams)
             .subscribe(products => {
-              this.products = products.items;
               this.pages = [];
               for (let i = 1; i <= products.pages ; i++) {
                 this.pages.push(i);
+              }
+              if(this.cart && this.cart.items.length > 0){
+                this.products = products.items.map(product => {
+                  if(this.cart){
+                    const productInCart = this.cart.items.find(item => item.product.id === product.id);
+                    if(productInCart){
+                      product.countInCart = productInCart?.quantity
+                    }
+                  }
+                  return product;
+                })
+              }else{
+                this.products = products.items;
               }
             })
         })

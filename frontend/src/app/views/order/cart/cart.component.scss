@@ -9,6 +9,19 @@
     .cart-title {
       @include head-Lora-36;
     }
+    .cart-empty{
+      margin-top: 20px;
+      margin-bottom: 100px;
+
+      div{
+        font-size: 16px;
+      }
+      .button{
+        width: 255px;
+        height: 53px;
+        margin-top: 20px;
+      }
+    }
       .cart-info {
         display: flex;
         justify-content: space-between;
@@ -110,6 +123,22 @@
           font-size: 14px;
           background: $gray-text-color;
           margin-top: 5px;
+        }
+      }
+    }
+    .cart-detail-action{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .button{
+        width: 234px;
+        height: 53px;
+
+        &.button-transparent{
+            width: 255px;
+            margin-right: 12px;
+            color: #6CAC72;
         }
       }
     }

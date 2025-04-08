@@ -15,6 +15,7 @@ export interface Product {
   diameter: number;
   url: string;
   type: ProductType;
+  countInCart?: number;
 }
 
 export interface Products {
