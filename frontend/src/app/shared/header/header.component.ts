@@ -5,6 +5,7 @@ import {DefaultErrorResponse} from '../../types/default-error.type';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {CartService} from '../services/cart.service';
 
 
 @Component({
@@ -21,18 +22,30 @@ export class HeaderComponent implements OnInit {
     {title: 'Доставка и оплата', link: '/delivery'},
   ]
   isLoggedIn: boolean = false;
+  count:number = 0;
 
   @Input() categories: CategoryWithTypes[] = [];
 
   constructor(private authService: AuthService,
               private snackBar: MatSnackBar,
-              private router: Router,) {
+              private router: Router,
+              private cartService: CartService,) {
     this.isLoggedIn = authService.getisLoggedIn();
   }
 
   ngOnInit(): void {
     this.authService.isLogged$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
+    })
+
+      this.cartService.getCartCount()
+        .subscribe(data => {
+          this.count = data.count;
+        })
+
+    this.cartService.count$
+    .subscribe(count => {
+      this.count = count;
     })
   }
 
