@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../../../types/product.types';
 import {NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
@@ -20,32 +20,36 @@ import { CartType } from '../../../types/cart.types';
   ],
   styleUrl: './product-card.component.scss'
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit{
 
   @Input() product!: Product;
   @Input() isLight: boolean = false;
-  @Input() countInCart: number = 0;
+  @Input() countInCart: number | undefined = 0;
 
  protected serverStaticPath = environment.serverStaticPath;
   public count: number = 1;
-isInCart:boolean = false
+
 
 constructor(private cartService: CartService){}
 
-
+ngOnInit(): void {
+  if(this.countInCart && this.countInCart > 1){
+    this.count =  this.countInCart;
+  }
+}
   addToCart(){
     this.cartService.updateCart(this.product.id, this.count)
     .subscribe((data: CartType) => {
-        this.isInCart = true;
+        this.countInCart = this.count;
     })
   }
 
   updateCount(value: number){
    this.count = value;
-   if(this.isInCart){
+   if(this.countInCart){
     this.cartService.updateCart(this.product.id, this.count)
     .subscribe((data: CartType) => {
-        this.isInCart = true;
+      this.countInCart = this.count;
     })
    }
   }
@@ -53,7 +57,7 @@ constructor(private cartService: CartService){}
   removeFromCart(){
     this.cartService.updateCart(this.product.id, 0)
     .subscribe((data: CartType) => {
-        this.isInCart = false;
+      this.countInCart = 0;
         this.count = 1;
     })
   }
