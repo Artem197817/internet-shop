@@ -76,4 +76,14 @@ export class AuthService {
   get userId():string | null{
     return localStorage.getItem(this.userIdKey);
   }
+
+  refresh(): Observable<DefaultErrorResponse | LoginResponseType> {
+    const tokens = this.getTokens();
+    if(tokens && tokens.refreshToken) {
+      return this.http.post<DefaultErrorResponse | LoginResponseType>(environment.api + 'refresh', {
+        refreshToken: tokens.refreshToken,
+      })
+    }
+    throw throwError(() => 'Can token not find');
+  }
 }

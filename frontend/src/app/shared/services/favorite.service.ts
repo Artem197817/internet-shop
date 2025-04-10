@@ -10,9 +10,14 @@ import { DefaultErrorResponse } from '../../types/default-error.type';
 })
 export class FavoriteService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getFavorites(): Observable<FavoriteType[] | DefaultErrorResponse> {
     return this.http.get<FavoriteType[] | DefaultErrorResponse>(environment.api + 'favorites')
+  }
+
+  removeFavorites(productId: string): Observable<DefaultErrorResponse> {
+    return this.http.delete <DefaultErrorResponse>(environment.api + 'favorites', {body: {productId}});
   }
 }

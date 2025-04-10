@@ -1,14 +1,15 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
-//import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 export const authGuard: CanActivateFn = (route, state) => {
- // const _snackBar = inject(MatSnackBarModule)
+ const _snackBar = inject(MatSnackBar)
   const authService = inject(AuthService);
   const isLogged = authService.getisLoggedIn();
- // _snackBar.open('JR')
+  if(!isLogged){
+    _snackBar.open('Пользователь не авторизован')
+  }
   return isLogged;
-
 };

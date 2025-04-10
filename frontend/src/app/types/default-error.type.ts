@@ -1,4 +1,4 @@
-export interface DefaultErrorResponse {
+export type DefaultErrorResponse = {
   error: boolean;
   message: string;
 }
