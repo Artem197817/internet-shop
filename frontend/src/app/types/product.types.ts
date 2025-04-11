@@ -16,6 +16,7 @@ export interface Product {
   url: string;
   type: ProductType;
   countInCart?: number;
+  isInFavorite?: boolean;
 }
 
 export interface Products {

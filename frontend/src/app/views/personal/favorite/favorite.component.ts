@@ -15,10 +15,10 @@ export class FavoriteComponent implements OnInit  {
   products: FavoriteType[] = [];
 
   protected serverStaticPath = environment.serverStaticPath;
-  constructor(private favotiteSerice: FavoriteService,){}
+  constructor(private favoriteService: FavoriteService,){}
 
   ngOnInit(): void {
-    this.favotiteSerice.getFavorites()
+    this.favoriteService.getFavorites()
     .subscribe((data: FavoriteType[] | DefaultErrorResponse )=> {
       if((data as DefaultErrorResponse).error !== undefined){
           const error = (data as DefaultErrorResponse).message;
@@ -29,6 +29,12 @@ export class FavoriteComponent implements OnInit  {
   }
 
   removeFromFavorites(id: string){
-
-  }
+      this.favoriteService.removeFavorites(id)
+      .subscribe(data => {
+        if(data.error){
+          throw new Error(data.message);
+        }
+        this.products = this.products.filter(item => item.id !== id);
+      })
+    }
 }

@@ -10,6 +10,9 @@ import { AppliedFilterType } from '../../../types/applied-filter.type';
 import {debounceTime} from 'rxjs';
 import { CartService } from '../../../shared/services/cart.service';
 import { CartType } from '../../../types/cart.types';
+import { FavoriteService } from '../../../shared/services/favorite.service';
+import { FavoriteType } from '../../../types/favorite.types';
+import { DefaultErrorResponse } from '../../../types/default-error.type';
 
 @Component({
   selector: 'app-catalog',
@@ -25,6 +28,7 @@ export class CatalogComponent implements OnInit {
   appliedFilters: AppliedFilterType [] = [];
   sortingOpen = false;
   cart: CartType | null = null;
+  favoriteProducts: FavoriteType[] | null = null;
   sortingOptions:{name: string, value: string}[] =[
     {name: 'От А до Я', value: 'az-asc'},
     {name: 'От Я до А', value: 'az-desc'},
@@ -38,14 +42,33 @@ export class CatalogComponent implements OnInit {
               private router: Router,
               private categoryService: CategoryService,
               private activatedRoute: ActivatedRoute,
-              private cartService: CartService) {}
+              private cartService: CartService,
+              private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
     this.cartService.getCart()
     .subscribe((data:CartType)=>{
       this.cart = data;
-    })
 
+      this.favoriteService.getFavorites()
+    .subscribe({
+      next: (data: FavoriteType[] | DefaultErrorResponse )=> {
+        if((data as DefaultErrorResponse).error !== undefined){
+            const error = (data as DefaultErrorResponse).message;
+            this.processCatalog();
+            throw new Error(error);
+         }
+          this.favoriteProducts = data as FavoriteType[];
+          this.processCatalog();
+      },
+      error: (error) =>{
+        this.processCatalog();
+      }
+    });
+  });
+}
+
+  processCatalog(){
     this.categoryService.getCategoriesWithTypes()
     .subscribe(categories => {
         this.categoriesWithTypes = categories;
@@ -113,10 +136,20 @@ export class CatalogComponent implements OnInit {
               }else{
                 this.products = products.items;
               }
+              if(this.favoriteProducts){
+                this.products = this.products
+                .map(product => {
+                  const productInFavorite = this.favoriteProducts?.find(item => item.id === product.id)
+                  if(productInFavorite){
+                    product.isInFavorite = true;
+                  }
+                  return product;
+                })
+              }
+
             })
         })
     })
-
   }
 
   removeAppliedFilter(appliedFilter: AppliedFilterType){

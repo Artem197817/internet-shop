@@ -6,6 +6,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { CartService } from '../../../shared/services/cart.service';
 import { CartType } from '../../../types/cart.types';
+import { FavoriteService } from '../../../shared/services/favorite.service';
+import { DefaultErrorResponse } from '../../../types/default-error.type';
+import { FavoriteType } from '../../../types/favorite.types';
+import { AuthService } from '../../../core/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -51,7 +56,10 @@ export class DetailComponent implements OnInit {
   constructor(private productService: ProductService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private cartService: CartService,) {}
+              private cartService: CartService,
+              private favoriteService: FavoriteService,
+              private authService: AuthService,
+              private snackBar: MatSnackBar,) {}
 
 
   ngOnInit() {
@@ -59,18 +67,32 @@ export class DetailComponent implements OnInit {
     .subscribe(params => {
       this.productService.getProduct(params['url'])
       .subscribe((data: Product) => {
-
+        this.product= data;
         this.cartService.getCart()
         .subscribe((cartData:CartType)=>{
           if(cartData){
             const productInCart = cartData.items.find(item => item.product.id === data.id)
             if(productInCart){
-              data.countInCart =  productInCart.quantity;
-              this.count = data.countInCart;
+              this.product.countInCart =  productInCart.quantity;
+              this.count = this.product.countInCart;
             }
           }
-          this.product= data;
+        });
+        
+      if(this.authService.getisLoggedIn()){
+        this.favoriteService.getFavorites()
+        .subscribe((data: FavoriteType[] | DefaultErrorResponse )=> {
+          if((data as DefaultErrorResponse).error !== undefined){
+              const error = (data as DefaultErrorResponse).message;
+              throw new Error(error);
+           }
+          const products = data as FavoriteType[];
+          const currentProductExist = products.find(item => item.id === this.product.id);
+          if(currentProductExist){
+            this.product.isInFavorite = true;
+          }
         })
+      }
       })
     })
 
@@ -104,5 +126,29 @@ export class DetailComponent implements OnInit {
        this.product.countInCart = this.count;
      })
     }
+   }
+
+   addToFavorite(){
+    if(!this.authService.getisLoggedIn()){
+        this.snackBar.open('Опция доступна для авторизованных пользователей');
+    }
+    if(this.product.isInFavorite){
+      this.favoriteService.removeFavorites(this.product.id)
+      .subscribe(data => {
+        if(data.error){
+          throw new Error(data.message);
+        }
+        this.product.isInFavorite = false;
+      })
+      return;
+    }
+    this.favoriteService.addToFavorites(this.product.id)
+    .subscribe((data:FavoriteType | DefaultErrorResponse) => {
+      if((data as DefaultErrorResponse).error !== undefined){
+        const error = (data as DefaultErrorResponse).message;
+        throw new Error(error);
+     }
+     this.product.isInFavorite = true;
+    })
    }
 }

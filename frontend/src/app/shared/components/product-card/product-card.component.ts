@@ -7,6 +7,11 @@ import {FormsModule} from '@angular/forms';
 import {CountSelectorComponent} from '../count-selector/count-selector.component';
 import { CartService } from '../../services/cart.service';
 import { CartType } from '../../../types/cart.types';
+import { FavoriteService } from '../../services/favorite.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FavoriteType } from '../../../types/favorite.types';
+import { DefaultErrorResponse } from '../../../types/default-error.type';
 
 @Component({
   selector: 'product-card',
@@ -30,7 +35,10 @@ export class ProductCardComponent implements OnInit{
   public count: number = 1;
 
 
-constructor(private cartService: CartService){}
+constructor(private cartService: CartService,
+  private favoriteService: FavoriteService,
+  private authService: AuthService,
+  private snackBar: MatSnackBar,){}
 
 ngOnInit(): void {
   if(this.countInCart && this.countInCart > 1){
@@ -61,4 +69,27 @@ ngOnInit(): void {
         this.count = 1;
     })
   }
+  addToFavorite(){
+    if(!this.authService.getisLoggedIn()){
+        this.snackBar.open('Опция доступна для авторизованных пользователей');
+    }
+    if(this.product.isInFavorite){
+      this.favoriteService.removeFavorites(this.product.id)
+      .subscribe(data => {
+        if(data.error){
+          throw new Error(data.message);
+        }
+        this.product.isInFavorite = false;
+      })
+      return;
+    }
+    this.favoriteService.addToFavorites(this.product.id)
+    .subscribe((data:FavoriteType | DefaultErrorResponse) => {
+      if((data as DefaultErrorResponse).error !== undefined){
+        const error = (data as DefaultErrorResponse).message;
+        throw new Error(error);
+     }
+     this.product.isInFavorite = true;
+    })
+   }
 }
