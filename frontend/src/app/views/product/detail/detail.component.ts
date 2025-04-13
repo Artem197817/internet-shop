@@ -69,16 +69,19 @@ export class DetailComponent implements OnInit {
       .subscribe((data: Product) => {
         this.product= data;
         this.cartService.getCart()
-        .subscribe((cartData:CartType)=>{
-          if(cartData){
-            const productInCart = cartData.items.find(item => item.product.id === data.id)
+        .subscribe((cartData:CartType | DefaultErrorResponse)=>{
+          if((cartData as DefaultErrorResponse).error !== undefined){
+            throw new Error((cartData as DefaultErrorResponse).message);
+          }
+          if(cartData as CartType){
+            const productInCart = (cartData as CartType).items.find(item => item.product.id === data.id)
             if(productInCart){
               this.product.countInCart =  productInCart.quantity;
               this.count = this.product.countInCart;
             }
           }
         });
-        
+
       if(this.authService.getisLoggedIn()){
         this.favoriteService.getFavorites()
         .subscribe((data: FavoriteType[] | DefaultErrorResponse )=> {
@@ -102,17 +105,23 @@ export class DetailComponent implements OnInit {
         this.bestProducts = bestProducts;
       })
   }
- 
+
 
   addToCart(){
     this.cartService.updateCart(this.product.id, this.count)
-    .subscribe((data: CartType) => {
+    .subscribe((data: CartType | DefaultErrorResponse) => {
+      if((data as DefaultErrorResponse).error !== undefined){
+        throw new Error((data as DefaultErrorResponse).message);
+      }
         this.product.countInCart = this.count;
     })
   }
   removeFromCart(){
     this.cartService.updateCart(this.product.id, 0)
-    .subscribe((data: CartType) => {
+    .subscribe((data: CartType | DefaultErrorResponse) => {
+      if((data as DefaultErrorResponse).error !== undefined){
+        throw new Error((data as DefaultErrorResponse).message);
+      }
       this.product.countInCart = 0;
         this.count = 1;
     })
@@ -122,7 +131,10 @@ export class DetailComponent implements OnInit {
     this.count = value;
     if(this.product.countInCart){
      this.cartService.updateCart(this.product.id, this.count)
-     .subscribe((data: CartType) => {
+     .subscribe((data: CartType | DefaultErrorResponse) => {
+       if((data as DefaultErrorResponse).error !== undefined){
+         throw new Error((data as DefaultErrorResponse).message);
+       }
        this.product.countInCart = this.count;
      })
     }

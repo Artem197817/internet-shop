@@ -39,8 +39,11 @@ export class HeaderComponent implements OnInit {
     })
 
       this.cartService.getCartCount()
-        .subscribe(data => {
-          this.count = data.count;
+        .subscribe((data: { count: number } | DefaultErrorResponse) => {
+          if((data as DefaultErrorResponse).error !== undefined){
+            throw new Error((data as DefaultErrorResponse).message);
+          }
+          this.count = (data as { count: number }).count;
         })
 
     this.cartService.count$

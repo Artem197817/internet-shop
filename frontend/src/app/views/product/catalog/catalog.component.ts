@@ -13,6 +13,7 @@ import { CartType } from '../../../types/cart.types';
 import { FavoriteService } from '../../../shared/services/favorite.service';
 import { FavoriteType } from '../../../types/favorite.types';
 import { DefaultErrorResponse } from '../../../types/default-error.type';
+import {AuthService} from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-catalog',
@@ -43,28 +44,36 @@ export class CatalogComponent implements OnInit {
               private categoryService: CategoryService,
               private activatedRoute: ActivatedRoute,
               private cartService: CartService,
-              private favoriteService: FavoriteService) {}
+              private favoriteService: FavoriteService,
+              private authService: AuthService,) {}
 
   ngOnInit(): void {
     this.cartService.getCart()
-    .subscribe((data:CartType)=>{
-      this.cart = data;
+    .subscribe((data: CartType | DefaultErrorResponse)=>{
+      if((data as DefaultErrorResponse).error !== undefined){
+        throw new Error((data as DefaultErrorResponse).message);
+      }
+      this.cart = data as CartType;
 
-      this.favoriteService.getFavorites()
-    .subscribe({
-      next: (data: FavoriteType[] | DefaultErrorResponse )=> {
-        if((data as DefaultErrorResponse).error !== undefined){
-            const error = (data as DefaultErrorResponse).message;
-            this.processCatalog();
-            throw new Error(error);
-         }
-          this.favoriteProducts = data as FavoriteType[];
-          this.processCatalog();
-      },
-      error: (error) =>{
+      if(this.authService.getisLoggedIn()) {
+        this.favoriteService.getFavorites()
+          .subscribe({
+            next: (data: FavoriteType[] | DefaultErrorResponse) => {
+              if ((data as DefaultErrorResponse).error !== undefined) {
+                const error = (data as DefaultErrorResponse).message;
+                this.processCatalog();
+                throw new Error(error);
+              }
+              this.favoriteProducts = data as FavoriteType[];
+              this.processCatalog();
+            },
+            error: (error) => {
+              this.processCatalog();
+            }
+          });
+      }else{
         this.processCatalog();
       }
-    });
   });
 }
 
@@ -139,9 +148,11 @@ export class CatalogComponent implements OnInit {
               if(this.favoriteProducts){
                 this.products = this.products
                 .map(product => {
-                  const productInFavorite = this.favoriteProducts?.find(item => item.id === product.id)
-                  if(productInFavorite){
-                    product.isInFavorite = true;
+                  if(this.favoriteProducts){
+                    const productInFavorite = this.favoriteProducts?.find(item => item.id === product.id)
+                    if(productInFavorite){
+                      product.isInFavorite = true;
+                    }
                   }
                   return product;
                 })
