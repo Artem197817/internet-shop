@@ -7,6 +7,7 @@ import { OrderComponent } from './order/order.component';
 import {CountSelectorComponent} from '../../shared/components/count-selector/count-selector.component';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {ProductCardComponent} from '../../shared/components/product-card/product-card.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import {ProductCardComponent} from '../../shared/components/product-card/product
     CartComponent,
     OrderComponent
   ],
-  imports: [
-    CommonModule,
-    OrderRoutingModule,
-    CountSelectorComponent,
-    CarouselModule,
-    ProductCardComponent,
-  ]
+    imports: [
+        CommonModule,
+        OrderRoutingModule,
+        CountSelectorComponent,
+        CarouselModule,
+        ProductCardComponent,
+        ReactiveFormsModule,
+    ]
 })
 export class OrderModule { }

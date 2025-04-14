@@ -169,18 +169,18 @@
   }
 }
 
-input[type="checkbox"]:checked, 
-input[type="checkbox"]:not(:checked), 
-input[type="radio"]:checked, 
-input[type="radio"]:not(:checked) 
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked),
+input[type="radio"]:checked,
+input[type="radio"]:not(:checked)
 {
     position: absolute;
     left: -9999px;
 }
 
-input[type="checkbox"]:checked + label, 
-input[type="checkbox"]:not(:checked) + label, 
-input[type="radio"]:checked + label, 
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:not(:checked) + label,
+input[type="radio"]:checked + label,
 input[type="radio"]:not(:checked) + label {
     display: inline-block;
     position: relative;
@@ -188,9 +188,9 @@ input[type="radio"]:not(:checked) + label {
     line-height: 20px;
     cursor: pointer;
 }
-input[type="checkbox"]:checked + label:before, 
+input[type="checkbox"]:checked + label:before,
 input[type="checkbox"]:not(:checked) + label:before,
-input[type="radio"]:checked + label:before, 
+input[type="radio"]:checked + label:before,
 input[type="radio"]:not(:checked) + label:before {
     content: "";
     position: absolute;
@@ -203,18 +203,18 @@ input[type="radio"]:not(:checked) + label:before {
     background-color: #ffffff;
 }
 
-input[type="checkbox"]:checked + label:before, 
+input[type="checkbox"]:checked + label:before,
 input[type="checkbox"]:not(:checked) + label:before {
     border-radius: 2px;
 }
 
-input[type="radio"]:checked + label:before, 
+input[type="radio"]:checked + label:before,
 input[type="radio"]:not(:checked) + label:before {
     border-radius: 100%;
 }
-input[type="checkbox"]:checked + label:after, 
-input[type="checkbox"]:not(:checked) + label:after, 
-input[type="radio"]:checked + label:after, 
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after,
+input[type="radio"]:checked + label:after,
 input[type="radio"]:not(:checked) + label:after {
     content: "";
     position: absolute;
@@ -224,7 +224,7 @@ input[type="radio"]:not(:checked) + label:after {
     transition: all 0.2s ease;
 }
 
-input[type="checkbox"]:checked + label:after, 
+input[type="checkbox"]:checked + label:after,
 input[type="checkbox"]:not(:checked) + label:after {
     left: 3px;
     top: 4px;
@@ -240,7 +240,7 @@ input[type="checkbox"]:not(:checked) + label:after {
     transform: rotate(-45deg);
 }
 
-input[type="radio"]:checked + label:after, 
+input[type="radio"]:checked + label:after,
 input[type="radio"]:not(:checked) + label:after {
     left: 5px;
     top: 5px;
@@ -249,13 +249,42 @@ input[type="radio"]:not(:checked) + label:after {
     border-radius: 100%;
     background-color: #2A592E;
 }
-input[type="checkbox"]:not(:checked) + label:after, 
+input[type="checkbox"]:not(:checked) + label:after,
 input[type="radio"]:not(:checked) + label:after {
     opacity: 0;
 }
 
-input[type="checkbox"]:checked + label:after, 
+input[type="checkbox"]:checked + label:after,
 input[type="radio"]:checked + label:after {
     opacity: 1;
+}
+
+.order-popup{
+  padding: 100px 70px 220px 70px;
+position: relative;
+  text-align: center;
+  color: $green-text-color;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-image: url("../../../../assets/images/popup-order.png") ;
+
+  .order-popup-close{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+
+  }
+  .order-popup-title{
+   @include head-Lora-32;
+    margin-bottom: 40px;
+  }
+  .order-popup-text{
+
+    div{
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+  }
 }
 
