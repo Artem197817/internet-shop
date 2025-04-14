@@ -5,6 +5,7 @@ import { PersonalRoutingModule } from './personal-routing.module';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { InfoComponent } from './info/info.component';
 import { OrdersComponent } from './orders/orders.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { OrdersComponent } from './orders/orders.component';
   ],
   imports: [
     CommonModule,
-    PersonalRoutingModule
+    PersonalRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class PersonalModule { }
