@@ -8,6 +8,9 @@ import {DeliveryType} from '../../../types/delivery.types';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {PaymentType} from '../../../types/payment.types';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { OrderService } from '../../../shared/services/order.service';
+import { OrderType } from '../../../types/order-form.types';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-order',
@@ -28,6 +31,7 @@ export class OrderComponent implements OnInit {
   @ViewChild('popup') popup!: TemplateRef<ElementRef>;
 
   constructor(private cartService: CartService,
+              private orderService: OrderService,
               private router: Router,
               private snackBar: MatSnackBar,
               private fb: FormBuilder,
@@ -104,12 +108,64 @@ export class OrderComponent implements OnInit {
   }
 
   createOrder() {
-    if(this.orderForm.valid){
-    this.dialogRef = this.dialog.open(this.popup);
-    this.dialogRef.backdropClick()
-      .subscribe(() => {
-        this.router.navigate(['/']);
+    if(this.orderForm.valid && this.orderForm.value.firstName && this.orderForm.value.lastName
+      && this.orderForm.value.phone && this.orderForm.value.paymentType
+      && this.orderForm.value.email){
+
+        const paramsObject: OrderType ={
+        deliveryType: this.deliveryType,
+        firstName: this.orderForm.value.firstName ,
+        lastName:this.orderForm.value.lastName ,
+        phone: this.orderForm.value.phone ,
+        paymentType: this.orderForm.value.paymentType,
+        email: this.orderForm.value.email ,
+      }
+      if(this.deliveryType === DeliveryType.delivery){
+          if(this.orderForm.value.street){
+            paramsObject.street = this.orderForm.value.street;
+          }
+          if(this.orderForm.value.house){
+            paramsObject.house = this.orderForm.value.house;
+          }
+          if(this.orderForm.value.entrance){
+            paramsObject.entrance = this.orderForm.value.entrance;
+          }
+          if(this.orderForm.value.apartment){
+            paramsObject.apartment = this.orderForm.value.apartment;
+          }
+      }
+      if(this.orderForm.value.comment){
+        paramsObject.comment = this.orderForm.value.comment;
+      }
+      if(this.orderForm.value.fatherName){
+        paramsObject.fatherName = this.orderForm.value.fatherName;
+      }
+
+      this.orderService.createOrder(paramsObject)
+      .subscribe({
+        next: (data: OrderType | DefaultErrorResponse)=> {
+          if((data as DefaultErrorResponse).error !== undefined){
+            throw new Error((data as DefaultErrorResponse).message);
+          }
+          this.dialogRef = this.dialog.open(this.popup);
+          this.dialogRef.backdropClick()
+            .subscribe(() => {
+              this.router.navigate(['/']);
+            })
+            this.cartService.setCount(0);
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          if(errorResponse.error && errorResponse.error.message){
+            this.snackBar.open(errorResponse.error.message);
+          }else{
+            this.snackBar.open('Ошибка заказа');
+          }
+        }
       })
+  
+    } else {
+      this.orderForm.markAllAsTouched();
+      this.snackBar.open('Заполните необходимые поля')
     }
   }
 

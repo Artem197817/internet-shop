@@ -14,4 +14,11 @@ export type OrderType ={
     apartment?: string ,
     comment?: string,
     fatherName?: string,
+    items?:
+    {
+        id: string,
+        quantity: number,
+        price: number,
+        total: number,
+    }[]
 }
