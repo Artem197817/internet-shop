@@ -13,9 +13,13 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  createOrder(params: UserInfoType): Observable<DefaultErrorResponse> {
-    return this.http.post<DefaultErrorResponse>(environment.api + 'orders', {
+  updateUserInfo(params: UserInfoType): Observable<DefaultErrorResponse> {
+    return this.http.post<DefaultErrorResponse>(environment.api + 'user', {
         params
-    }, {withCredentials: true})
+    })
+  }
+
+  getUserInfo(): Observable<UserInfoType | DefaultErrorResponse> {
+    return this.http.get<UserInfoType | DefaultErrorResponse>(environment.api + 'user')
   }
 }

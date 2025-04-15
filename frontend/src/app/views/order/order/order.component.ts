@@ -11,6 +11,9 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { OrderService } from '../../../shared/services/order.service';
 import { OrderType } from '../../../types/order-form.types';
 import { HttpErrorResponse } from '@angular/common/http';
+import {UserService} from '../../../shared/services/user.service';
+import {UserInfoType} from '../../../types/user-info.types';
+import {AuthService} from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-order',
@@ -32,6 +35,8 @@ export class OrderComponent implements OnInit {
 
   constructor(private cartService: CartService,
               private orderService: OrderService,
+              private userService: UserService,
+              private authService: AuthService,
               private router: Router,
               private snackBar: MatSnackBar,
               private fb: FormBuilder,
@@ -72,6 +77,32 @@ export class OrderComponent implements OnInit {
         }
         this.calculateTotal();
       })
+
+    if(this.authService.getisLoggedIn()) {
+      this.userService.getUserInfo()
+        .subscribe((data: UserInfoType | DefaultErrorResponse) => {
+          if ((data as DefaultErrorResponse).error !== undefined) {
+            throw new Error((data as DefaultErrorResponse).message);
+          }
+          const userInfo = data as UserInfoType;
+          const paramsToUpdate = {
+            firstName: userInfo.firstName ? userInfo.firstName : '',
+            lastName: userInfo.lastName ? userInfo.lastName : '',
+            fatherName: userInfo.fatherName ? userInfo.fatherName : '',
+            phone: userInfo.phone ? userInfo.phone : '',
+            paymentType: userInfo.paymentType ? userInfo.paymentType : PaymentType.cashToCourier,
+            email: userInfo.email ? userInfo.email : '',
+            street: userInfo.street ? userInfo.street : '',
+            house: userInfo.house ? userInfo.house : '',
+            entrance: userInfo.entrance ? userInfo.entrance : '',
+            apartment: userInfo.apartment ? userInfo.apartment : '',
+            comment: ''
+          }
+          this.deliveryType = userInfo.deliveryType ? userInfo.deliveryType : DeliveryType.delivery;
+
+          this.orderForm.setValue(paramsToUpdate);
+        })
+    }
   }
 
   calculateTotal() {
@@ -162,7 +193,7 @@ export class OrderComponent implements OnInit {
           }
         }
       })
-  
+
     } else {
       this.orderForm.markAllAsTouched();
       this.snackBar.open('Заполните необходимые поля')

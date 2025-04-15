@@ -2,7 +2,7 @@ import { DeliveryType } from "./delivery.types";
 import { PaymentType } from "./payment.types";
 
 export type UserInfoType ={
-    deliveryType?: DeliveryType,
+  deliveryType?: DeliveryType,
     firstName?: string ,
     lastName?:string ,
     phone?: string ,
