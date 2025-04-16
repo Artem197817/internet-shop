@@ -78,53 +78,42 @@ export class InfoComponent implements OnInit {
       const paramsObject: UserInfoType = {
         deliveryType: this.deliveryType,
         paymentType: this.userInfoForm.get('paymentType')?.value,
-      }
-      if (this.userInfoForm.value.firstName) {
-        paramsObject.firstName = this.userInfoForm.value.firstName;
-      }
-      if (this.userInfoForm.value.lastName) {
-        paramsObject.lastName = this.userInfoForm.value.lastName;
-      }
-      if (this.userInfoForm.value.phone) {
-        paramsObject.phone = this.userInfoForm.value.phone;
-      }
-      if (this.userInfoForm.value.email) {
-        paramsObject.email = this.userInfoForm.value.email;
-      }
-      if (this.userInfoForm.value.street) {
-        paramsObject.street = this.userInfoForm.value.street;
-      }
-      if (this.userInfoForm.value.house) {
-        paramsObject.house = this.userInfoForm.value.house;
-      }
-      if (this.userInfoForm.value.entrance) {
-        paramsObject.entrance = this.userInfoForm.value.entrance;
-      }
-      if (this.userInfoForm.value.apartment) {
-        paramsObject.apartment = this.userInfoForm.value.apartment;
-      }
-      if (this.userInfoForm.value.fatherName) {
-        paramsObject.fatherName = this.userInfoForm.value.fatherName;
-      }
+      };
 
-      this.userService.updateUserInfo(paramsObject)
-        .subscribe({
-          next: (data: DefaultErrorResponse) => {
-            if (data.error) {
-              this.snackBar.open(data.message);
-              throw new Error(data.message);
-            }
+      // List of optional fields to include if they have values
+      const optionalFields = [
+        'firstName',
+        'lastName',
+        'phone',
+        'email',
+        'street',
+        'house',
+        'entrance',
+        'apartment',
+        'fatherName'
+      ];
+
+      optionalFields.forEach(field => {
+        const value = this.userInfoForm.get(field)?.value;
+        if (value) {
+          (paramsObject as any)[field] = value;
+        }
+      });
+
+      this.userService.updateUserInfo(paramsObject).subscribe({
+        next: (data: DefaultErrorResponse) => {
+          if (data.error) {
             this.snackBar.open(data.message);
-            this.userInfoForm.markAsPristine();
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            if (errorResponse.error && errorResponse.error.message) {
-              this.snackBar.open(errorResponse.error.message);
-            } else {
-              this.snackBar.open('Ошибка сохранения');
-            }
+            throw new Error(data.message);
           }
-        })
+          this.snackBar.open(data.message);
+          this.userInfoForm.markAsPristine();
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          const message = errorResponse.error?.message || 'Ошибка сохранения';
+          this.snackBar.open(message);
+        }
+      });
     }
   }
 }

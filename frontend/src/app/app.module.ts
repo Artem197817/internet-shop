@@ -14,6 +14,7 @@ import {ProductCardComponent} from './shared/components/product-card/product-car
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthInterceptor} from './core/auth/auth.interseptor';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {AuthInterceptor} from './core/auth/auth.interseptor';
         CarouselModule,
         AppRoutingModule,
         ProductCardComponent,
+        FormsModule,
     ],
     providers: [
         {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},

@@ -39,10 +39,10 @@
           </a>
           <mat-menu #menu="matMenu">
             <button mat-menu-item>
-              <span routerLink="/profile">Профиль</span>
+              <a routerLink="/profile">Профиль</a>
             </button>
             <button mat-menu-item>
-              <span (click)="logout()">Выйти</span>
+              <a (click)="logout()">Выйти</a>
             </button>
           </mat-menu>
 
@@ -89,7 +89,7 @@
           </ul>
         </div>
         <div class="header-bottom-search">
-          <input type="text" placeholder="Начните искать">
+          <input type="text" placeholder="Начните искать" [ngModel]="searchValue" (ngModelChange)="changeSearchValue($event)">
         </div>
       </div>
     </div>

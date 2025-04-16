@@ -20,6 +20,9 @@ export class ProductService {
   getProducts(params?: ActiveParam): Observable<Products> {
     return this.http.get<Products>(this.apiUrl, { params: params });
   }
+  searchProducts(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl + '/search?query=' + query);
+  }
 
   getProduct(url: string): Observable<Product> {
     return this.http.get<Product>(this.apiUrl + '/' + url);

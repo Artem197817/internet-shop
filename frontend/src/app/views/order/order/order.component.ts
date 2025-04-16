@@ -134,8 +134,8 @@ export class OrderComponent implements OnInit {
       this.orderForm.get('entrance')?.setValue('');
       this.orderForm.get('apartment')?.setValue('');
     }
-    this.orderForm.get('street')?.updateValueAndValidity;
-    this.orderForm.get('house')?.updateValueAndValidity;
+    this.orderForm.get('street')?.updateValueAndValidity();
+    this.orderForm.get('house')?.updateValueAndValidity();
   }
 
   createOrder() {

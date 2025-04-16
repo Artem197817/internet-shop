@@ -14,9 +14,7 @@ export class UserService {
   }
 
   updateUserInfo(params: UserInfoType): Observable<DefaultErrorResponse> {
-    return this.http.post<DefaultErrorResponse>(environment.api + 'user', {
-        params
-    })
+    return this.http.post<DefaultErrorResponse>(environment.api + 'user', params)
   }
 
   getUserInfo(): Observable<UserInfoType | DefaultErrorResponse> {

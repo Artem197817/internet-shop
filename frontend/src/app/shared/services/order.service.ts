@@ -16,9 +16,8 @@ export class OrderService {
 
 
   createOrder(params: OrderType): Observable<OrderType | DefaultErrorResponse> {
-    return this.http.post<OrderType | DefaultErrorResponse>(environment.api + 'orders', {
-        params
-    }, {withCredentials: true})
+    return this.http.post<OrderType | DefaultErrorResponse>(environment.api + 'orders',
+        params, {withCredentials: true})
   }
 
   getOrders(): Observable<OrderType[] | DefaultErrorResponse> {

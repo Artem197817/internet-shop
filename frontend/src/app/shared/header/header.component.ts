@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CategoryType, CategoryWithTypes} from '../../types/category.types';
+import {CategoryWithTypes} from '../../types/category.types';
 import {AuthService} from '../../core/auth/auth.service';
 import {DefaultErrorResponse} from '../../types/default-error.type';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   ]
   isLoggedIn: boolean = false;
   count:number = 0;
+  searchValue: string = '';
 
   @Input() categories: CategoryWithTypes[] = [];
 
@@ -70,6 +71,14 @@ export class HeaderComponent implements OnInit {
     this.authService.userId = null;
     this.snackBar.open('Logout')
     this.router.navigate(['/'])
+  }
+
+  changeSearchValue(newValue: string) {
+    this.searchValue = newValue;
+
+    if (this.searchValue && this.searchValue.length > 2) {
+
+    }
   }
 }
 
