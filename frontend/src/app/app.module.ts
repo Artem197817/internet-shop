@@ -14,7 +14,8 @@ import {ProductCardComponent} from './shared/components/product-card/product-car
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthInterceptor} from './core/auth/auth.interseptor';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { LoaderComponent } from "./shared/components/loader/loader.component";
 
 
 @NgModule({
@@ -26,17 +27,19 @@ import {FormsModule} from "@angular/forms";
         MainComponent,
     ],
     imports: [
-        CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatSnackBarModule,
-        MatMenuModule,
-        HttpClientModule,
-        CarouselModule,
-        AppRoutingModule,
-        ProductCardComponent,
-        FormsModule,
-    ],
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    HttpClientModule,
+    CarouselModule,
+    AppRoutingModule,
+    ProductCardComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    LoaderComponent
+],
     providers: [
         {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
       {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

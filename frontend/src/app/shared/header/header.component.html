@@ -10,7 +10,7 @@
             <ul>
               @for (headerTopLink of headerTopMenuList; track headerTopLink) {
                 <li>
-                  <a routerLink="{{headerTopLink.link}}">{{ headerTopLink.title }}</a>
+                  <a routerLink="{{headerTopLink.link}}" fragment="{{headerTopLink.fragment}}">{{ headerTopLink.title }}</a>
                 </li>
               }
             </ul>
@@ -89,7 +89,14 @@
           </ul>
         </div>
         <div class="header-bottom-search">
-          <input type="text" placeholder="Начните искать" [ngModel]="searchValue" (ngModelChange)="changeSearchValue($event)">
+          <input type="text" placeholder="Начните искать" [formControl]="searchField">
+       
+            <div class="search-products" *ngIf="products && products.length > 0">
+              <div class="search-product" *ngFor="let product of products" (click)="selectProduct(product.url)">
+                <div class="search-product-image" style="background-image: url({{serverStaticPath + product.image}})"></div>
+                <div class="search-product-name">{{product.name}}</div>
+              </div>
+            </div>
         </div>
       </div>
     </div>

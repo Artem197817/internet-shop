@@ -11,9 +11,9 @@ export class FooterComponent {
   protected footerTopMenuList = [
     {title: 'Главная', link: '/'},
     {title: 'Каталог', link: '/catalog'},
-    {title: 'Доставка и оплата', link: '/delivery'},
+    {title: 'Доставка и оплата', link: '/', fragment: 'delivery'},
     {title: 'Новости', link: '/news'},
-    {title: 'Отзывы', link: '/reviews'},
+    {title: 'Отзывы', link: '/', fragment: 'reviews'},
   ]
   @Input() categories: CategoryWithTypes[]=[];
 

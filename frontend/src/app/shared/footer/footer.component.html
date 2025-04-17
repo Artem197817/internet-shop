@@ -10,7 +10,7 @@
       <ul>
         @for (footerLink of footerTopMenuList; track footerLink) {
           <li>
-            <a routerLink="{{footerLink.link}}">{{ footerLink.title }}</a>
+            <a routerLink="{{footerLink.link}}" fragment="{{footerLink.fragment}}">{{ footerLink.title }}</a>
           </li>
         }
       </ul>
