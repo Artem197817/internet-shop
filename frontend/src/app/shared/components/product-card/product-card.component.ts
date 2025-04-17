@@ -51,7 +51,7 @@ export class ProductCardComponent implements OnInit {
   addToCart() {
     this.cartService.updateCart(this.product.id, this.count)
       .subscribe((data: CartType | DefaultErrorResponse) => {
-        if((data as DefaultErrorResponse).error !== undefined){
+        if ((data as DefaultErrorResponse).error !== undefined) {
           throw new Error((data as DefaultErrorResponse).message);
         }
         this.countInCart = this.count;
@@ -63,7 +63,7 @@ export class ProductCardComponent implements OnInit {
     if (this.countInCart) {
       this.cartService.updateCart(this.product.id, this.count)
         .subscribe((data: CartType | DefaultErrorResponse) => {
-          if((data as DefaultErrorResponse).error !== undefined){
+          if ((data as DefaultErrorResponse).error !== undefined) {
             throw new Error((data as DefaultErrorResponse).message);
           }
           this.countInCart = this.count;
@@ -74,7 +74,7 @@ export class ProductCardComponent implements OnInit {
   removeFromCart() {
     this.cartService.updateCart(this.product.id, 0)
       .subscribe((data: CartType | DefaultErrorResponse) => {
-        if((data as DefaultErrorResponse).error !== undefined){
+        if ((data as DefaultErrorResponse).error !== undefined) {
           throw new Error((data as DefaultErrorResponse).message);
         }
         this.countInCart = 0;

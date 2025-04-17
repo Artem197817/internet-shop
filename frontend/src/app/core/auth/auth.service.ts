@@ -15,11 +15,13 @@ export class AuthService {
   public userIdKey: string = 'userId';
 
   public isLogged$: Subject<boolean> = new Subject<boolean>();
-  private isLogged:boolean = false;
+  private isLogged: boolean = false;
+
   constructor(private http: HttpClient) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
   }
-  public getisLoggedIn(): boolean{
+
+  public getisLoggedIn(): boolean {
     return this.isLogged;
   }
 
@@ -30,14 +32,16 @@ export class AuthService {
       rememberMe,
     })
   }
- public signup(email: string, password: string, passwordRepeat: string): Observable<DefaultErrorResponse | LoginResponseType> {
+
+  public signup(email: string, password: string, passwordRepeat: string): Observable<DefaultErrorResponse | LoginResponseType> {
     return this.http.post<DefaultErrorResponse | LoginResponseType>(environment.api + 'signup', {
       email,
       password,
       passwordRepeat,
     })
   }
- public logout(): Observable<DefaultErrorResponse> {
+
+  public logout(): Observable<DefaultErrorResponse> {
     const tokens = this.getTokens()
     if (tokens && tokens.refreshToken) {
       return this.http.post<DefaultErrorResponse>(environment.api + 'logout', {
@@ -47,39 +51,43 @@ export class AuthService {
     throw throwError(() => 'Can token not find')
   }
 
-  public setTokens(accessToken: string, refreshToken: string): void{
+  public setTokens(accessToken: string, refreshToken: string): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
     localStorage.setItem(this.refreshTokenKey, refreshToken);
     this.isLogged = true;
     this.isLogged$.next(true);
   }
-  public removeTokens(): void{
+
+  public removeTokens(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);
     this.isLogged = false;
     this.isLogged$.next(false);
   }
-  public getTokens(): {accessToken: string|null, refreshToken: string|null }{
-    return {accessToken: localStorage.getItem(this.accessTokenKey),
-      refreshToken: localStorage.getItem(this.refreshTokenKey)};
+
+  public getTokens(): { accessToken: string | null, refreshToken: string | null } {
+    return {
+      accessToken: localStorage.getItem(this.accessTokenKey),
+      refreshToken: localStorage.getItem(this.refreshTokenKey)
+    };
 
   }
 
-   set userId(userId: string | null){
-    if(userId) {
+  set userId(userId: string | null) {
+    if (userId) {
       localStorage.setItem(this.userIdKey, userId);
-    }else {
+    } else {
       localStorage.removeItem(this.userIdKey);
     }
   }
 
-  get userId():string | null{
+  get userId(): string | null {
     return localStorage.getItem(this.userIdKey);
   }
 
   refresh(): Observable<DefaultErrorResponse | LoginResponseType> {
     const tokens = this.getTokens();
-    if(tokens && tokens.refreshToken) {
+    if (tokens && tokens.refreshToken) {
       return this.http.post<DefaultErrorResponse | LoginResponseType>(environment.api + 'refresh', {
         refreshToken: tokens.refreshToken,
       })

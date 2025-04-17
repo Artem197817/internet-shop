@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { UserInfoType } from '../../types/user-info.types';
-import { Observable } from 'rxjs';
-import { DefaultErrorResponse } from '../../types/default-error.type';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {UserInfoType} from '../../types/user-info.types';
+import {Observable} from 'rxjs';
+import {DefaultErrorResponse} from '../../types/default-error.type';
 import {environment} from '../../../environments/environment';
 
 @Injectable({

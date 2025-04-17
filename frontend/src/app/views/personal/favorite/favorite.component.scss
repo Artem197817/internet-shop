@@ -2,77 +2,85 @@
 @use "../../../../assets/styles/mixins" as *;
 
 
-.favorite{
-    padding-bottom: 110px;
-    padding-top: 50px;
-.container{
-    .favorite-title{
-        @include head-Lora-36;
-        color: $green-text-color;
-        margin-bottom: 35px;
+.favorite {
+  padding-bottom: 110px;
+  padding-top: 50px;
+
+  .container {
+    .favorite-title {
+      @include head-Lora-36;
+      color: $green-text-color;
+      margin-bottom: 35px;
     }
-    .favorite-empty{
+
+    .favorite-empty {
+      margin-top: 20px;
+      margin-bottom: 100px;
+
+      div {
+        font-size: 16px;
+      }
+
+      .button {
+        width: 255px;
+        height: 53px;
         margin-top: 20px;
-        margin-bottom: 100px;
-  
-        div{
-          font-size: 16px;
+      }
+    }
+
+    .favorite-products {
+      .favorite-product {
+        border-top: 1px solid #E7F1E8;
+        margin-top: 15px;
+        padding-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &:first-child {
+          margin-top: 0;
+          padding-top: 0;
+          border-top: 0;
         }
-        .button{
-          width: 255px;
+
+        .favorite-product-image {
+          background-position: center;
+          background-size: cover;
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+        }
+
+        .favorite-product-name {
+          font-size: 20px;
+          line-height: 130%;
+          color: $gray-text-color;
+          margin-left: 24px;
+          width: 567px;
+          margin-right: 20px;
+        }
+
+        .favorite-product-price {
+          font-family: Montserrat, sans-serif;
+          font-weight: 600;
+          font-size: 22px;
+          color: $gray-text-color;
+          width: 110px;
+          margin-right: 183px;
+        }
+
+        .favorite-product-action button {
+          width: 160px;
           height: 53px;
-          margin-top: 20px;
+        }
+
+        .favorite-product-remove {
+          margin-left: 61px;
+          cursor: pointer;
+
         }
       }
-    .favorite-products{
-        .favorite-product{
-            border-top: 1px solid #E7F1E8;
-            margin-top: 15px;
-            padding-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            &:first-child{
-                margin-top: 0;
-                padding-top: 0;
-                border-top: 0;
-            }
-
-            .favorite-product-image{
-                background-position: center;
-                background-size: cover;
-                width: 100px;
-                height: 100px;
-                border-radius: 5px;
-            }
-            .favorite-product-name{
-                font-size: 20px;
-                line-height: 130%;
-                color: $gray-text-color;
-                margin-left: 24px;
-                width: 567px;
-                margin-right: 20px;
-            }
-            .favorite-product-price{
-                font-family: Montserrat,sans-serif;
-                font-weight: 600;
-                font-size: 22px;
-                color: $gray-text-color;
-                width: 110px;
-                margin-right: 183px;
-            }
-            .favorite-product-action button{
-                width: 160px;
-                height: 53px;
-            }
-            .favorite-product-remove{
-                margin-left: 61px;
-                cursor: pointer;
-
-            }
-        }
     }
 
-}
+  }
 }

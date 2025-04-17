@@ -2,90 +2,99 @@
 @use '../../../../assets/styles/mixins' as *;
 @use '../../../../assets/styles/personal';
 
-.orders{
-    padding-top: 50px;
-    padding-bottom: 156px;
-    .container{
-        font-size: 16px;
-        .orders-title{
-            font-family: Montserrat, sans-serif;
-            font-weight: 500;
-            margin-bottom: 14px;
-            color: $gray-text-color;
-            
-        }
-        .orders-title-small{
-            margin-bottom: 72px;
-            color: $gray-text-color;
-        }
+.orders {
+  padding-top: 50px;
+  padding-bottom: 156px;
 
-        .orders-empty{
-            margin-top: 20px;
-            margin-bottom: 100px;
+  .container {
+    font-size: 16px;
 
-            div{
-                font-size: 16px;
-            }
-            .button{
-                width: 255px;
-                margin-top: 20px;
-            }
-        }
-        .orders-list{
-            .orders-list-item{
-                border-bottom: 1px solid #E7F1E8;
-                padding-bottom: 46px;
-                margin-bottom: 47px;
-                display: flex;
-                align-items: baseline;
-                justify-content: space-between;
+    .orders-title {
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+      margin-bottom: 14px;
+      color: $gray-text-color;
 
-                .order-number{
-                    font-size: 20px;
-                    text-decoration: underline;
-                    text-decoration-style: solid;
-                    color: #111111;
-                    width: 297px;    
-                    margin-right: 20px;
-                }
-                .order-products{
-                    width: 509px;
-                    margin-right: 20px;
-                    color: #ADADAD;
-
-                
-                .order-products-count{
-                    margin-bottom: 12px;
-                }
-                .order-product-list tr td:first-child{
-                    padding-left: 10px;
-                    padding-right: 20px;
-                }
-            }
-
-                &:last-child{
-                    border-bottom: 0;
-                    padding-bottom: 0;
-                    margin-bottom: 0;
-                }
-                .order-status{
-                    padding: 8px 24px;
-                    text-align: center;
-                    border-radius: 50px;
-                    border: 1px solid;
-                    box-sizing: border-box;
-                    background-color: transparent;
-
-                }
-                .order-amount{
-                    font-family: Montserrat, sans-serif;
-                    font-weight: 600;
-                    font-size: 22px;
-                    color: $gray-text-color;  
-                    width: 186px;
-                    text-align: right;                   
-                }
-            }
-        }
     }
+
+    .orders-title-small {
+      margin-bottom: 72px;
+      color: $gray-text-color;
+    }
+
+    .orders-empty {
+      margin-top: 20px;
+      margin-bottom: 100px;
+
+      div {
+        font-size: 16px;
+      }
+
+      .button {
+        width: 255px;
+        margin-top: 20px;
+      }
+    }
+
+    .orders-list {
+      .orders-list-item {
+        border-bottom: 1px solid #E7F1E8;
+        padding-bottom: 46px;
+        margin-bottom: 47px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+
+        .order-number {
+          font-size: 20px;
+          text-decoration: underline;
+          text-decoration-style: solid;
+          color: #111111;
+          width: 297px;
+          margin-right: 20px;
+        }
+
+        .order-products {
+          width: 509px;
+          margin-right: 20px;
+          color: #ADADAD;
+
+
+          .order-products-count {
+            margin-bottom: 12px;
+          }
+
+          .order-product-list tr td:first-child {
+            padding-left: 10px;
+            padding-right: 20px;
+          }
+        }
+
+        &:last-child {
+          border-bottom: 0;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+
+        .order-status {
+          padding: 8px 24px;
+          text-align: center;
+          border-radius: 50px;
+          border: 1px solid;
+          box-sizing: border-box;
+          background-color: transparent;
+
+        }
+
+        .order-amount {
+          font-family: Montserrat, sans-serif;
+          font-weight: 600;
+          font-size: 22px;
+          color: $gray-text-color;
+          width: 186px;
+          text-align: right;
+        }
+      }
+    }
+  }
 }

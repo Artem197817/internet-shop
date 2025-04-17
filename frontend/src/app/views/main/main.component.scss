@@ -204,7 +204,8 @@
             color: $green-text-color;
           }
         }
-        .review-item-text{
+
+        .review-item-text {
           font-size: 16px;
           line-height: 140%;
           color: $gray-text-color;
@@ -212,19 +213,22 @@
 
         }
       }
-      .reviews-arrows{
+
+      .reviews-arrows {
         display: flex;
         z-index: 10;
-        .move{
+
+        .move {
           top: calc(50% - 5px);
           display: flex;
           position: absolute;
           cursor: pointer;
 
-          &.move-backward{
+          &.move-backward {
             left: -41px;
           }
-          &.move-forward{
+
+          &.move-forward {
             right: -41px;
           }
         }
@@ -234,6 +238,7 @@
 
   }
 }
-.map iframe{
+
+.map iframe {
   vertical-align: bottom;
 }

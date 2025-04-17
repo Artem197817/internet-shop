@@ -16,7 +16,7 @@ export class CartService {
   constructor(private http: HttpClient) {
   }
 
-  setCount(count: number){
+  setCount(count: number) {
     this.count = count;
     this.count$.next(this.count);
   }
@@ -53,7 +53,7 @@ export class CartService {
       .pipe(
         tap((data) => {
           if (!data.hasOwnProperty('error')) {
-              this.setCount((data as { count: number }).count)
+            this.setCount((data as { count: number }).count)
           }
         })
       )

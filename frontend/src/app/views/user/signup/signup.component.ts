@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../core/auth/auth.service';
@@ -24,8 +24,8 @@ export class SignupComponent {
 
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['',[ Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]],
-      passwordRepeat: ['', [Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]],
+      password: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]],
+      passwordRepeat: ['', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]],
       agree: [false, Validators.requiredTrue],
     });
   }
@@ -35,8 +35,8 @@ export class SignupComponent {
     const passwordRepeat = formGroup.get('passwordRepeat')?.value;
 
     if (password !== passwordRepeat) {
-      formGroup.get('passwordRepeat')?.setErrors({ passwordMismatch: true });
-      return { passwordMismatch: true };
+      formGroup.get('passwordRepeat')?.setErrors({passwordMismatch: true});
+      return {passwordMismatch: true};
     } else {
       formGroup.get('passwordRepeat')?.setErrors(null);
       return null;
@@ -44,7 +44,7 @@ export class SignupComponent {
   }
 
   protected signup(): void {
-    if (this.signupForm.valid && this.signupForm.value.email && this.signupForm.value.password && this.signupForm.value.passwordRepeat ) {
+    if (this.signupForm.valid && this.signupForm.value.email && this.signupForm.value.password && this.signupForm.value.passwordRepeat) {
       this.authService.signup(this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.passwordRepeat)
         .subscribe(
           {

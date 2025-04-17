@@ -43,27 +43,27 @@ export class InfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getUserInfo()
-    .subscribe((data: UserInfoType | DefaultErrorResponse) => {
-      if((data as DefaultErrorResponse).error !== undefined){
-        throw new Error((data as DefaultErrorResponse).message);
-      }
-     const userInfo = data as UserInfoType;
-      const paramsToUpdate = {
-        firstName: userInfo.firstName? userInfo.firstName : '',
-        lastName: userInfo.lastName? userInfo.lastName : '',
-        fatherName: userInfo.fatherName? userInfo.fatherName : '',
-        phone: userInfo.phone? userInfo.phone : '',
-        paymentType: userInfo.paymentType? userInfo.paymentType : PaymentType.cashToCourier,
-        email: userInfo.email? userInfo.email : '',
-        street: userInfo.street? userInfo.street : '',
-        house: userInfo.house? userInfo.house : '',
-        entrance: userInfo.entrance? userInfo.entrance : '',
-        apartment: userInfo.apartment? userInfo.apartment : '',
-      }
-      this.deliveryType = userInfo.deliveryType? userInfo.deliveryType : DeliveryType.delivery;
+      .subscribe((data: UserInfoType | DefaultErrorResponse) => {
+        if ((data as DefaultErrorResponse).error !== undefined) {
+          throw new Error((data as DefaultErrorResponse).message);
+        }
+        const userInfo = data as UserInfoType;
+        const paramsToUpdate = {
+          firstName: userInfo.firstName ? userInfo.firstName : '',
+          lastName: userInfo.lastName ? userInfo.lastName : '',
+          fatherName: userInfo.fatherName ? userInfo.fatherName : '',
+          phone: userInfo.phone ? userInfo.phone : '',
+          paymentType: userInfo.paymentType ? userInfo.paymentType : PaymentType.cashToCourier,
+          email: userInfo.email ? userInfo.email : '',
+          street: userInfo.street ? userInfo.street : '',
+          house: userInfo.house ? userInfo.house : '',
+          entrance: userInfo.entrance ? userInfo.entrance : '',
+          apartment: userInfo.apartment ? userInfo.apartment : '',
+        }
+        this.deliveryType = userInfo.deliveryType ? userInfo.deliveryType : DeliveryType.delivery;
 
-      this.userInfoForm.setValue(paramsToUpdate);
-    })
+        this.userInfoForm.setValue(paramsToUpdate);
+      })
 
   }
 

@@ -20,8 +20,8 @@ import { debounceTime } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   protected headerTopMenuList = [
-    {title: 'Главная', link: '/'},
-    {title: 'Каталог', link: '/catalog'},
+    {title: 'Главная', link: '/', fragment: ''},
+    {title: 'Каталог', link: '/catalog', fragment: ''},
     {title: 'Отзывы', link: '/', fragment: 'reviews'},
     {title: 'Доставка и оплата', link: '/', fragment: 'delivery'},
   ]
@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/'])
   }
 
-  /** 
+  /**
   changeSearchValue(newValue: string) {
     this.searchValue = newValue;
 

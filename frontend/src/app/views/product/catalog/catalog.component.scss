@@ -55,7 +55,7 @@
         .catalog-sorting-head {
           display: flex;
           align-items: center;
-          padding: 12px 0 12px 23px ;
+          padding: 12px 0 12px 23px;
           justify-content: space-between;
           color: $gray-text-color;
           font-size: 16px;
@@ -94,6 +94,7 @@
         &.open {
           width: 257px;
           min-width: 257px;
+
           .catalog-sorting-head {
             color: #000000;
             background: #EBEBEB;

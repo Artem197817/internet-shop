@@ -16,7 +16,7 @@
       display: flex;
       justify-content: space-between;
 
-   
+
       .order-detail {
         width: 422px;
 
@@ -33,38 +33,40 @@
             color: $green-text-color;
             margin-bottom: 20px;
           }
-            .order-details-info-item {
-              display: flex;
-              align-items: center;
-              color: $gray-text-color;
-              margin-bottom: 10px;
 
-              .order-details-info-item-text {
-                font-size: 16px;
-                margin-right: 12px;
-              }
+          .order-details-info-item {
+            display: flex;
+            align-items: center;
+            color: $gray-text-color;
+            margin-bottom: 10px;
 
+            .order-details-info-item-text {
+              font-size: 16px;
+              margin-right: 12px;
+            }
+
+            .order-details-info-item-data {
+              font-family: Montserrat, sans-serif;
+              font-weight: 500;
+              font-size: 20px
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+
+              .order-details-info-item-text,
               .order-details-info-item-data {
                 font-family: Montserrat, sans-serif;
-                font-weight: 500;
-                font-size: 20px
+                font-weight: 600;
               }
 
-              &:last-child {
-                margin-bottom: 0;
-
-                .order-details-info-item-text,
-                .order-details-info-item-data {
-                  font-family: Montserrat, sans-serif;
-                  font-weight: 600;
-                }
-
-              }
             }
+          }
 
 
         }
-        .button{
+
+        .button {
           height: 53px;
           width: 100%;
         }
@@ -74,29 +76,31 @@
 }
 
 
-.order-popup{
+.order-popup {
   padding: 100px 70px 220px 70px;
-position: relative;
+  position: relative;
   text-align: center;
   color: $green-text-color;
   background-position: bottom center;
   background-repeat: no-repeat;
-  background-image: url("../../../../assets/images/popup-order.png") ;
+  background-image: url("../../../../assets/images/popup-order.png");
 
-  .order-popup-close{
+  .order-popup-close {
     position: absolute;
     top: 30px;
     right: 30px;
     cursor: pointer;
 
   }
-  .order-popup-title{
-   @include head-Lora-32;
+
+  .order-popup-title {
+    @include head-Lora-32;
     margin-bottom: 40px;
   }
-  .order-popup-text{
 
-    div{
+  .order-popup-text {
+
+    div {
       font-size: 20px;
       margin-bottom: 5px;
     }

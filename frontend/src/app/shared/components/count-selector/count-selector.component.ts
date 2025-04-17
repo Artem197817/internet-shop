@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -16,19 +16,20 @@ export class CountSelectorComponent {
 
   @Input() count: number = 1;
 
-  decreaseCount(){
-    if(this.count > 1){
+  decreaseCount() {
+    if (this.count > 1) {
       this.count--;
       this.countChange();
     }
   }
-  increaseCount(){
 
-      this.count++;
-      this.countChange();
+  increaseCount() {
+
+    this.count++;
+    this.countChange();
   }
 
-  countChange(){
+  countChange() {
     this.onCountChange.emit(this.count)
   }
 }

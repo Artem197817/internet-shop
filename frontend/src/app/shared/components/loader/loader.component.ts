@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatProgressSpinner} from '@angular/material/progress-spinner';
-import { LoaderService } from '../../services/loader.service';
+import {Component, OnInit} from '@angular/core';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {LoaderService} from '../../services/loader.service';
 
 @Component({
   selector: 'app-loader',
@@ -11,17 +11,18 @@ import { LoaderService } from '../../services/loader.service';
   templateUrl: './loader.component.html',
   styleUrl: './loader.component.scss'
 })
-export class LoaderComponent implements OnInit{
+export class LoaderComponent implements OnInit {
 
-isShowed: boolean = false;
+  isShowed: boolean = false;
 
-constructor(private loaderService: LoaderService){}
+  constructor(private loaderService: LoaderService) {
+  }
 
-ngOnInit(): void {
-  
-  this.loaderService.isShowed$.subscribe((value: boolean )=> {
-    this.isShowed = value;
-  })
-}
+  ngOnInit(): void {
+
+    this.loaderService.isShowed$.subscribe((value: boolean) => {
+      this.isShowed = value;
+    })
+  }
 
 }

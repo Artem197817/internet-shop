@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CategoryType, CategoryWithTypes} from '../../types/category.types';
+import {CategoryWithTypes} from '../../types/category.types';
 
 @Component({
   selector: 'app-footer',
@@ -9,13 +9,13 @@ import {CategoryType, CategoryWithTypes} from '../../types/category.types';
 })
 export class FooterComponent {
   protected footerTopMenuList = [
-    {title: 'Главная', link: '/'},
-    {title: 'Каталог', link: '/catalog'},
+    {title: 'Главная', link: '/', fragment: ''},
+    {title: 'Каталог', link: '/catalog', fragment: ''},
     {title: 'Доставка и оплата', link: '/', fragment: 'delivery'},
-    {title: 'Новости', link: '/news'},
+    {title: 'Новости', link: '/', fragment: ''},
     {title: 'Отзывы', link: '/', fragment: 'reviews'},
   ]
-  @Input() categories: CategoryWithTypes[]=[];
+  @Input() categories: CategoryWithTypes[] = [];
 
- protected email:string='homedecor@gmail.com'
+  protected email: string = 'homedecor@gmail.com'
 }

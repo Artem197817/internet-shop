@@ -1,14 +1,15 @@
 @use '../../../../assets/styles/auth-form';
 
-.signup{
+.signup {
   margin-top: 10px;
-  .container{
+
+  .container {
     display: flex;
 
-    .page-image{
+    .page-image {
       margin-left: 222px;
 
-      img{
+      img {
         vertical-align: bottom;
       }
     }
