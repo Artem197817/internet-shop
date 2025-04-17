@@ -13,7 +13,7 @@ import {LoaderService} from '../../services/loader.service';
 })
 export class LoaderComponent implements OnInit {
 
-  isShowed: boolean = false;
+  protected isShowed: boolean = false;
 
   constructor(private loaderService: LoaderService) {
   }

@@ -4,4 +4,5 @@ export interface FavoriteType {
     price: number;
     image: string;
     url: string;
+    isInCart: boolean;
   }

@@ -16,10 +16,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class InfoComponent implements OnInit {
 
-  userInfoForm: FormGroup;
-  deliveryType: DeliveryType = DeliveryType.delivery;
-  deliveryTypes = DeliveryType;
-  paymentTypes = PaymentType;
+  protected userInfoForm: FormGroup;
+  protected deliveryType: DeliveryType = DeliveryType.delivery;
+  protected deliveryTypes = DeliveryType;
+  protected paymentTypes = PaymentType;
 
 
   constructor(private fb: FormBuilder,

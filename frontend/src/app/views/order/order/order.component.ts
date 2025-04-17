@@ -23,14 +23,14 @@ import {AuthService} from '../../../core/auth/auth.service';
 })
 export class OrderComponent implements OnInit {
 
-  cart: CartType | null = null;
-  totalAmount: number = 0;
-  totalCount: number = 0;
-  deliveryType: DeliveryType = DeliveryType.delivery;
-  deliveryTypes = DeliveryType;
-  paymentTypes = PaymentType;
-  orderForm: FormGroup;
-  dialogRef: MatDialogRef<any> | null = null;
+  private cart: CartType | null = null;
+  protected totalAmount: number = 0;
+  protected totalCount: number = 0;
+  protected deliveryType: DeliveryType = DeliveryType.delivery;
+  protected deliveryTypes = DeliveryType;
+  protected paymentTypes = PaymentType;
+  protected orderForm: FormGroup;
+  private dialogRef: MatDialogRef<any> | null = null;
   @ViewChild('popup') popup!: TemplateRef<ElementRef>;
 
   constructor(private cartService: CartService,

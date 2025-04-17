@@ -25,19 +25,19 @@ export class CatalogComponent implements OnInit {
 
   protected products: Product[] = [];
   protected categoriesWithTypes: CategoryWithTypes[] = [];
-  activeParams: ActiveParam = {types: []}
-  appliedFilters: AppliedFilterType [] = [];
-  sortingOpen = false;
-  cart: CartType | null = null;
-  favoriteProducts: FavoriteType[] | null = null;
-  sortingOptions: { name: string, value: string }[] = [
+  protected activeParams: ActiveParam = {types: []}
+  protected appliedFilters: AppliedFilterType [] = [];
+  protected sortingOpen = false;
+  public cart: CartType | null = null;
+  private favoriteProducts: FavoriteType[] | null = null;
+  protected sortingOptions: { name: string, value: string }[] = [
     {name: 'От А до Я', value: 'az-asc'},
     {name: 'От Я до А', value: 'az-desc'},
     {name: 'По возрастанию цены', value: 'price-asc'},
     {name: 'По убыванию цены', value: 'price-desc'},
   ];
 
-  pages: number[] = [];
+  protected pages: number[] = [];
 
   constructor(private productService: ProductService,
               private router: Router,

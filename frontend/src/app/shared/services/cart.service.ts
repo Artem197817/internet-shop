@@ -21,6 +21,10 @@ export class CartService {
     this.count$.next(this.count);
   }
 
+  getCount():number{
+    return this.count;
+  }
+
   getCart(): Observable<CartType | DefaultErrorResponse> {
     return this.http.get<CartType | DefaultErrorResponse>(environment.api + 'cart', {withCredentials: true})
 

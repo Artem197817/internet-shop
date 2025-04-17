@@ -21,7 +21,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class DetailComponent implements OnInit {
 
-  count: number = 1
+  protected count: number = 1
   protected bestProducts: Product[] = [];
   protected product!: Product;
   protected serverStaticPath = environment.serverStaticPath;

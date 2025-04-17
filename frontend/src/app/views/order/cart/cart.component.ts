@@ -16,10 +16,10 @@ import {DefaultErrorResponse} from '../../../types/default-error.type';
 })
 export class CartComponent implements OnInit {
 
-  extraProducts: Product[] = [];
-  cart: CartType | null = null;
-  totalAmount: number = 0;
-  totalCount: number = 0;
+  protected extraProducts: Product[] = [];
+  public cart: CartType | null = null;
+  public totalAmount: number = 0;
+  protected totalCount: number = 0;
   protected serverStaticPath = environment.serverStaticPath;
   protected customOptions: OwlOptions = {
     loop: true,

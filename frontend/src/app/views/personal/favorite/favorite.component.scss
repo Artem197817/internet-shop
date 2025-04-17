@@ -72,6 +72,21 @@
         .favorite-product-action button {
           width: 160px;
           height: 53px;
+
+          .count{
+            margin-left: 10px;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            font-family: Montserrat, sans-serif;
+            font-weight: 400;
+            font-size: 9px;
+            color: $base-text-color;
+            background: #B6D5B9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
 
         .favorite-product-remove {

@@ -22,9 +22,9 @@ export class CategoryFiltersComponent implements OnInit {
   @Input() cwt: CategoryWithTypes | null = null;
   @Input() type: string | null = null;
   protected open = false;
-  activeParams: ActiveParam = {types: []}
-  from: number | null = null;
-  to: number | null = null;
+  protected activeParams: ActiveParam = {types: []}
+  protected from: number | null = null;
+  protected to: number | null = null;
 
   get title(): string {
     if (this.cwt) {

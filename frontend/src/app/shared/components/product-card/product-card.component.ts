@@ -33,6 +33,7 @@ export class ProductCardComponent implements OnInit {
 
   protected serverStaticPath = environment.serverStaticPath;
   public count: number = 1;
+  protected isLoggedIn: boolean = false;
 
 
   constructor(private cartService: CartService,
@@ -40,6 +41,7 @@ export class ProductCardComponent implements OnInit {
               private authService: AuthService,
               private snackBar: MatSnackBar,
               private router: Router,) {
+    this.isLoggedIn = this.authService.getisLoggedIn();
   }
 
   ngOnInit(): void {

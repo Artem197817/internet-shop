@@ -25,13 +25,12 @@ export class HeaderComponent implements OnInit {
     {title: 'Отзывы', link: '/', fragment: 'reviews'},
     {title: 'Доставка и оплата', link: '/', fragment: 'delivery'},
   ]
-  isLoggedIn: boolean = false;
-  count:number = 0;
-//  searchValue: string = '';
-  products: Product[] = [];
+  protected isLoggedIn: boolean = false;
+  protected count:number = 0;
+  protected products: Product[] = [];
   protected serverStaticPath = environment.serverStaticPath;
-  showedSearch: boolean = false;
-  searchField = new FormControl();
+  private showedSearch: boolean = false;
+  protected searchField = new FormControl();
 
   @Input() categories: CategoryWithTypes[] = [];
 
