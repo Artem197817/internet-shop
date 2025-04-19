@@ -5,7 +5,7 @@
       <div>В корзине нет товаров</div>
       <button class="button" routerLink="/catalog">В каталог</button>
     </div>
-    <div class="cart-info" *ngIf="cart && cart.items.length > 1">
+    <div class="cart-info" *ngIf="cart && cart.items.length > 0">
       <div class="cart-products">
         <div class="cart-product" *ngFor="let cartProduct of cart.items">
           <div class="cart-product-image"
