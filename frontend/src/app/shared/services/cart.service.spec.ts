@@ -19,11 +19,11 @@ describe('cart service',()=>{
         TestBed.configureTestingModule({
             providers:[ 
                 CartService,
-                {provide: HttpClient, userValue: valueServiceSpy}
+                {provide: HttpClient, useValue: valueServiceSpy}
             ]
         })
         cartService = TestBed.inject(CartService);
-    })
+    });
  
      it('should emit new count value ',(done: DoneFn)=>{
 
@@ -32,14 +32,14 @@ describe('cart service',()=>{
             done();
          })
          cartService.getCartCount().subscribe();
-     })
+     });
      
      it('should emit false value ',(done: DoneFn)=>{
         cartService.getCart().subscribe(()=>{
            expect(valueServiceSpy.get).toHaveBeenCalledOnceWith(environment.api + 'cart', {withCredentials: true});
            done();     
-        })
+        });
 
-        })
+        });
     
       })
